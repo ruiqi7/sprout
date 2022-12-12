@@ -5,7 +5,7 @@ const CreatePost: React.FC = () => {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
 
-    const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handlePost = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
         const post = {
             ID: 6,
@@ -41,7 +41,7 @@ const CreatePost: React.FC = () => {
                     placeholder="Body"
                 />
             </div>
-            <button className="post-button" onClick={handleClick}>Post</button>
+            <button className="post-button" onClick={handlePost}>Post</button>
         </form>
     );
 }

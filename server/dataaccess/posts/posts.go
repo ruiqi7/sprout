@@ -45,3 +45,9 @@ func DeletePost(db *sql.DB, id int) error {
 	_, err := db.Exec(queryStr, id)
 	return err
 }
+
+func EditPost(db *sql.DB, id int, title, body string) error {
+	queryStr := "UPDATE posts SET title=$1, body=$2 where id=$3"
+	_, err := db.Exec(queryStr, title, body, id)
+	return err
+}

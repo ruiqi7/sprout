@@ -16,7 +16,7 @@ const PostCard: React.FC<Props> = ({ post }) => {
                 <Typography> {post.body} </Typography>
                 <Typography> {post.username} </Typography>
                 <Typography> {post.time} </Typography>
-                <Link to = {`/forum/post/${post.id}`}>
+                <Link to={`/forum/post/${post.id}`}>
                     <button>Post Details</button>
                 </Link>
             </CardContent>

@@ -48,3 +48,10 @@ func DeletePost(w http.ResponseWriter, r *http.Request) {
 	err = posts.DeletePost(database.GetDB(), num)
 	database.CheckError(err)
 }
+
+func EditPost(w http.ResponseWriter, r *http.Request) {
+	var post models.Post
+	err := json.NewDecoder(r.Body).Decode(&post)
+	err = posts.EditPost(database.GetDB(), post.ID, post.Title, post.Body)
+	database.CheckError(err)
+}
