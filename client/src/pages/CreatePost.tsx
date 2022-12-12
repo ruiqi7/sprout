@@ -8,7 +8,7 @@ const CreatePost: React.FC = () => {
     const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
         const post = {
-            ID: 5,
+            ID: 6,
             Username: "poster",
             Title: title,
             Body: body,

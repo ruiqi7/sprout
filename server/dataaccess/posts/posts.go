@@ -6,7 +6,7 @@ import (
 	"github.com/ruiqi7/web-forum/server/models"
 )
 
-// Solution below adapted from https://blog.logrocket.com/how-to-build-a-restful-api-with-docker-postgresql-and-go-chi/
+// Solution adapted from https://blog.logrocket.com/how-to-build-a-restful-api-with-docker-postgresql-and-go-chi/
 func GetAllPosts(db *sql.DB) (*models.PostList, error) {
 	list := &models.PostList{}
 	rows, err := db.Query("SELECT * FROM posts")
@@ -26,12 +26,16 @@ func GetAllPosts(db *sql.DB) (*models.PostList, error) {
 	return list, nil
 }
 
+func GetPost(db *sql.DB, id int) (*models.Post, error) {
+	post := &models.Post{}
+	queryStr := "SELECT * FROM posts WHERE id=$1"
+	row := db.QueryRow(queryStr, id)
+	err := row.Scan(&post.ID, &post.Username, &post.Title, &post.Body, &post.Time)
+	return post, err
+}
+
 func CreatePost(db *sql.DB, post models.Post) error {
 	queryStr := "INSERT INTO posts (id, username, title, body, time) VALUES ($1, $2, $3, $4, $5)"
-	// err := db.QueryRow(queryStr, post.ID, post.Username, post.Title, post.Body, post.Time)
 	_, err := db.Exec(queryStr, post.ID, post.Username, post.Title, post.Body, post.Time)
-	if err != nil {
-		return err
-	}
-	return nil
+	return err
 }
