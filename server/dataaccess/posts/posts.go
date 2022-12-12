@@ -25,3 +25,13 @@ func GetAllPosts(db *sql.DB) (*models.PostList, error) {
 
 	return list, nil
 }
+
+func CreatePost(db *sql.DB, post models.Post) error {
+	queryStr := "INSERT INTO posts (id, username, title, body, time) VALUES ($1, $2, $3, $4, $5)"
+	// err := db.QueryRow(queryStr, post.ID, post.Username, post.Title, post.Body, post.Time)
+	_, err := db.Exec(queryStr, post.ID, post.Username, post.Title, post.Body, post.Time)
+	if err != nil {
+		return err
+	}
+	return nil
+}
