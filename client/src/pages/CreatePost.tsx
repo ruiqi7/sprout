@@ -1,7 +1,7 @@
-import axios from "axios";
-import React, { useState } from "react";
+import axios from 'axios';
+import React, { useState } from 'react';
 
-const CreatePost = () => {
+const CreatePost: React.FC = () => {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
 
