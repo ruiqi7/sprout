@@ -39,3 +39,9 @@ func CreatePost(db *sql.DB, post models.Post) error {
 	_, err := db.Exec(queryStr, post.ID, post.Username, post.Title, post.Body, post.Time)
 	return err
 }
+
+func DeletePost(db *sql.DB, id int) error {
+	queryStr := "DELETE FROM posts WHERE id=$1"
+	_, err := db.Exec(queryStr, id)
+	return err
+}

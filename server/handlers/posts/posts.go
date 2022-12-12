@@ -37,3 +37,14 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 	database.CheckError(err)
 	//w.Write([]byte("Post created!"))
 }
+
+func DeletePost(w http.ResponseWriter, r *http.Request) {
+	id := chi.URLParam(r, "id")
+	num, err := strconv.Atoi(id)
+	if err != nil {
+		w.WriteHeader(404)
+		return
+	}
+	err = posts.DeletePost(database.GetDB(), num)
+	database.CheckError(err)
+}

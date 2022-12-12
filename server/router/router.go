@@ -17,6 +17,7 @@ func SetUp() http.Handler {
 		r.Get("/posts", posts.GetAllPosts)
 		r.Get("/post/{id}", posts.GetPost)
 		r.Post("/create", posts.CreatePost)
+		r.Delete("/post/{id}", posts.DeletePost)
 	})
 
 	return r

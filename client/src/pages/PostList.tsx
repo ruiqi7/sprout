@@ -14,7 +14,7 @@ class PostList extends React.Component {
         axios.get("http://localhost:8000/forum/posts")
             .then(res => this.setState(res.data));
     }
-    
+
     render() {
         return (
             <div className="post-list">
