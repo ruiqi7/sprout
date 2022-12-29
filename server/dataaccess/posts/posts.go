@@ -9,7 +9,7 @@ import (
 // Solution adapted from https://blog.logrocket.com/how-to-build-a-restful-api-with-docker-postgresql-and-go-chi/
 func GetAllPosts(db *sql.DB) (*models.PostList, error) {
 	list := &models.PostList{}
-	rows, err := db.Query("SELECT * FROM posts")
+	rows, err := db.Query("SELECT * FROM posts ORDER BY time DESC")
 	if err != nil {
 		return list, err
 	}
@@ -35,8 +35,8 @@ func GetPost(db *sql.DB, id int) (*models.Post, error) {
 }
 
 func CreatePost(db *sql.DB, post models.Post) error {
-	queryStr := "INSERT INTO posts (id, username, title, body, time) VALUES ($1, $2, $3, $4, $5)"
-	_, err := db.Exec(queryStr, post.ID, post.Username, post.Title, post.Body, post.Time)
+	queryStr := "INSERT INTO posts (username, title, body, time) VALUES ($1, $2, $3, current_timestamp)"
+	_, err := db.Exec(queryStr, post.Username, post.Title, post.Body)
 	return err
 }
 

@@ -1,18 +1,24 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const CreatePost: React.FC = () => {
+    const [username, setUsername] = useState("");
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
+
+    useEffect(() => {
+        (async () => {
+            const res = await axios.get("http://localhost:8000/forum/user");
+            setUsername(res.data);
+        })();
+    }, []);
 
     const handlePost = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
         const post = {
-            ID: 6,
-            Username: "poster",
+            Username: username,
             Title: title,
-            Body: body,
-            Time: "now"
+            Body: body
         }
         axios.post("http://localhost:8000/forum/create", post)
             // .then(res => {

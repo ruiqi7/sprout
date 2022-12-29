@@ -19,6 +19,7 @@ func SetUp() http.Handler {
 	r.Group(func(r chi.Router) {
 		r.Post("/signout", users.VerifyAuth(users.SignOut))
 		r.Route("/forum", func(r chi.Router) {
+			r.Get("/user", users.VerifyAuth(users.GetUser))
 			r.Get("/posts", users.VerifyAuth(posts.GetAllPosts))
 			r.Get("/post/{id}", users.VerifyAuth(posts.GetPost))
 			r.Post("/create", users.VerifyAuth(posts.CreatePost))

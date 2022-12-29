@@ -18,7 +18,7 @@ class PostList extends React.Component {
     render() {
         return (
             <div className="post-list">
-                {this.state.posts.map(post => <PostCard post={post} key={post.id} />)}
+                {this.state.posts && this.state.posts.map(post => <PostCard post={post} key={post.id} />)}
             </div>
         );
     }

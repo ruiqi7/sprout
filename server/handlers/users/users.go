@@ -34,7 +34,6 @@ func generateJWT(id int, username string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-
 	return tokenStr, nil
 }
 
@@ -95,4 +94,19 @@ func SignOut(w http.ResponseWriter, r *http.Request) {
 		Name:    "token",
 		Expires: time.Now().Add(-15 * time.Minute),
 	})
+}
+
+// Solution adapted from https://stackoverflow.com/questions/72682230/golang-jwt-mapclaims-get-user-id
+func GetUser(w http.ResponseWriter, r *http.Request) {
+	cookie, err := r.Cookie("token")
+	database.CheckError(err)
+
+	tokenStr := cookie.Value
+	token, err := jwt.ParseWithClaims(tokenStr, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
+		return []byte(key), nil
+	})
+	database.CheckError(err)
+
+	claims := token.Claims.(*CustomClaims)
+	json.NewEncoder(w).Encode(claims.Username)
 }
