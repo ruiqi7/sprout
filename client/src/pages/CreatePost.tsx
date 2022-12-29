@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const CreatePost: React.FC = () => {
+    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
@@ -21,10 +23,7 @@ const CreatePost: React.FC = () => {
             Body: body
         }
         axios.post("http://localhost:8000/forum/create", post)
-            // .then(res => {
-            //     console.log(res);
-            //     console.log(res.data);
-            // });
+            .then(() => navigate("/forum/posts"))
     }
 
     return (
@@ -48,6 +47,9 @@ const CreatePost: React.FC = () => {
                 />
             </div>
             <button className="post-button" onClick={handlePost}>Post</button>
+            <Link to="/forum/posts">
+                <button>Back</button>
+            </Link>
         </form>
     );
 }

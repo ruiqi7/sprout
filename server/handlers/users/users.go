@@ -51,7 +51,6 @@ func VerifyAuth(endpointHandler func(w http.ResponseWriter, r *http.Request)) ht
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		cookie, err := r.Cookie("token")
 		if err != nil {
-			w.Write([]byte("Missing token!"))
 			return
 		}
 
@@ -59,12 +58,10 @@ func VerifyAuth(endpointHandler func(w http.ResponseWriter, r *http.Request)) ht
 		token, err := verifyJWT(tokenStr)
 
 		if err != nil {
-			w.Write([]byte("Error parsing token!"))
 			return
 		}
 
 		if !token.Valid {
-			w.Write([]byte("Invalid token!"))
 			return
 		}
 
@@ -99,7 +96,9 @@ func SignOut(w http.ResponseWriter, r *http.Request) {
 // Solution adapted from https://stackoverflow.com/questions/72682230/golang-jwt-mapclaims-get-user-id
 func GetUser(w http.ResponseWriter, r *http.Request) {
 	cookie, err := r.Cookie("token")
-	database.CheckError(err)
+	if err != nil {
+		return
+	}
 
 	tokenStr := cookie.Value
 	token, err := jwt.ParseWithClaims(tokenStr, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {

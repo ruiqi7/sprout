@@ -6,7 +6,6 @@ import CreatePost from './pages/CreatePost';
 import Home from './pages/Home';
 import PostDetails from './pages/PostDetails';
 import SignIn from './pages/SignIn';
-import NavBar from './components/NavBar';
 import axios from 'axios';
 
 function App() { 
@@ -15,7 +14,6 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <NavBar />
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/signin" element={<SignIn />} />

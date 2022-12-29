@@ -1,17 +1,21 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import SignedInLinks from './SignedInLinks';
+import SignedOutLinks from './SignedOutLinks';
 
 const NavBar: React.FC = () => {
-    const navigate = useNavigate();
+    const [username, setUsername] = useState("");
     
-    const handleSignOut = () => {
-        axios.post("http://localhost:8000/signout")
-            .then(res => navigate("/"))
-    }
+    useEffect(() => {
+        (async () => {
+            const res = await axios.get("http://localhost:8000/user");
+            setUsername(res.data);
+        })();
+    }, []);
     
     return (
         <div className="navbar">
-            <button className="signout-button" onClick={handleSignOut}>Sign out!</button>
+            { username ? (<SignedInLinks />) : <SignedOutLinks /> }
         </div>
     );
 }
