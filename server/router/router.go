@@ -6,6 +6,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 
+	"github.com/ruiqi7/web-forum/server/handlers/comments"
 	"github.com/ruiqi7/web-forum/server/handlers/posts"
 	"github.com/ruiqi7/web-forum/server/handlers/users"
 )
@@ -21,11 +22,21 @@ func SetUp() http.Handler {
 		r.Post("/signout", users.VerifyAuth(users.SignOut))
 		r.Route("/forum", func(r chi.Router) {
 			r.Get("/user", users.VerifyAuth(users.GetUser))
+
 			r.Get("/posts", users.VerifyAuth(posts.GetAllPosts))
 			r.Get("/post/{id}", users.VerifyAuth(posts.GetPost))
 			r.Post("/create", users.VerifyAuth(posts.CreatePost))
 			r.Delete("/post/{id}", users.VerifyAuth(posts.DeletePost))
 			r.Put("/post/{id}", users.VerifyAuth(posts.EditPost))
+
+			r.Post("/post/{id}/comment", users.VerifyAuth(comments.CreateComment))
+			r.Get("/post/{id}/comments", users.VerifyAuth(comments.GetAllComments))
+
+			r.Route("/comment", func(r chi.Router) {
+				r.Get("/{id}", users.VerifyAuth(comments.GetComment))
+				r.Delete("/{id}", users.VerifyAuth(comments.DeleteComment))
+				r.Put("/{id}", users.VerifyAuth(comments.EditComment))
+			})
 		})
 	})
 
