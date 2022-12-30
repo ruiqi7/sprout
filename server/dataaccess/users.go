@@ -1,4 +1,4 @@
-package users
+package dataaccess
 
 import (
 	"database/sql"

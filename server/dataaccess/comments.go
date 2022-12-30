@@ -1,17 +1,16 @@
-package commments
+package dataaccess
 
 import (
 	"database/sql"
 
 	"github.com/lib/pq"
-	"github.com/ruiqi7/web-forum/server/dataaccess/posts"
 	"github.com/ruiqi7/web-forum/server/models"
 )
 
 func GetAllComments(db *sql.DB, id int) (*models.CommentList, error) {
 	list := &models.CommentList{}
 
-	post, err := posts.GetPost(db, id)
+	post, err := GetPost(db, id)
 	if err != nil {
 		return list, err
 	}
@@ -51,18 +50,28 @@ func CreateComment(db *sql.DB, comment models.Comment, postID int) error {
 		return err
 	}
 
-	err = posts.AddComment(db, postID, id)
+	err = AddComment(db, postID, id)
 	return err
 }
 
 func DeleteComment(db *sql.DB, id int) error {
 	queryStr := "DELETE FROM comments WHERE id=$1"
 	_, err := db.Exec(queryStr, id)
+	if err != nil {
+		return err
+	}
+	err = DeleteCommentID(db, id)
+	return err
+}
+
+func DeleteComments(db *sql.DB, ids pq.Int64Array) error {
+	queryStr := "DELETE FROM comments WHERE id=ANY($1)"
+	_, err := db.Exec(queryStr, ids)
 	return err
 }
 
 func EditComment(db *sql.DB, id int, content string) error {
-	queryStr := "UPDATE comments SET content=$1, WHERE id=$2"
+	queryStr := "UPDATE comments SET content=$1 WHERE id=$2"
 	_, err := db.Exec(queryStr, content, id)
 	return err
 }

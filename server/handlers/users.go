@@ -1,4 +1,4 @@
-package users
+package handlers
 
 import (
 	"encoding/json"
@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v4"
-	"github.com/ruiqi7/web-forum/server/dataaccess/users"
+	"github.com/ruiqi7/web-forum/server/dataaccess"
 	"github.com/ruiqi7/web-forum/server/database"
 	"github.com/ruiqi7/web-forum/server/models"
 )
@@ -73,7 +73,7 @@ func VerifyAuth(endpointHandler func(w http.ResponseWriter, r *http.Request)) ht
 func SignIn(w http.ResponseWriter, r *http.Request) {
 	var user models.User
 	err := json.NewDecoder(r.Body).Decode(&user)
-	id, err := users.GetUserID(database.GetDB(), user)
+	id, err := dataaccess.GetUserID(database.GetDB(), user)
 	database.CheckError(err)
 
 	tokenStr, err := generateJWT(id, user.Username)

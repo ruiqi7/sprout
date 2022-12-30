@@ -1,4 +1,4 @@
-package posts
+package dataaccess
 
 import (
 	"database/sql"
@@ -46,8 +46,15 @@ func CreatePost(db *sql.DB, post models.Post) error {
 }
 
 func DeletePost(db *sql.DB, id int) error {
-	queryStr := "DELETE FROM posts WHERE id=$1"
-	_, err := db.Exec(queryStr, id)
+	var comments pq.Int64Array
+	queryStr := "DELETE FROM posts WHERE id=$1 RETURNING comments"
+	row := db.QueryRow(queryStr, id)
+	err := row.Scan(&comments)
+	if err != nil {
+		return err
+	}
+
+	err = DeleteComments(db, comments)
 	return err
 }
 
@@ -60,5 +67,11 @@ func EditPost(db *sql.DB, id int, title, body string) error {
 func AddComment(db *sql.DB, id, commentID int) error {
 	queryStr := "UPDATE posts SET comments=array_append(comments, $1) WHERE id=$2"
 	_, err := db.Exec(queryStr, commentID, id)
+	return err
+}
+
+func DeleteCommentID(db *sql.DB, commentID int) error {
+	queryStr := "UPDATE posts SET comments=array_remove(comments, $1) WHERE $1=any(comments)"
+	_, err := db.Exec(queryStr, commentID)
 	return err
 }
