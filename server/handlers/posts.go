@@ -54,3 +54,10 @@ func EditPost(w http.ResponseWriter, r *http.Request) {
 	err = dataaccess.EditPost(database.GetDB(), post)
 	database.CheckError(err)
 }
+
+func SearchPosts(w http.ResponseWriter, r *http.Request) {
+	search := chi.URLParam(r, "search")
+	posts, err := dataaccess.SearchPosts(database.GetDB(), search)
+	database.CheckError(err)
+	json.NewEncoder(w).Encode(posts)
+}

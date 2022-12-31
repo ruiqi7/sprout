@@ -75,3 +75,25 @@ func DeleteCommentID(db *sql.DB, commentID int) error {
 	_, err := db.Exec(queryStr, commentID)
 	return err
 }
+
+func SearchPosts(db *sql.DB, search string) (*models.PostList, error) {
+	list := &models.PostList{}
+	queryStr := "SELECT * FROM posts WHERE category=$1 ORDER BY time DESC"
+	rows, err := db.Query(queryStr, search)
+	if err != nil {
+		return list, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var post models.Post
+		comments := pq.Int64Array{}
+		err := rows.Scan(&post.ID, &post.Username, &post.Title, &post.Body, &post.Category, &post.Time, &comments)
+		if err != nil {
+			return list, err
+		}
+		post.Comments = []int64(comments)
+		list.Posts = append(list.Posts, post)
+	}
+
+	return list, nil
+}
