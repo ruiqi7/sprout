@@ -54,6 +54,7 @@ const PostDetails = () => {
         <div className="post-details">
             { post && <h2>{ post.title }</h2> }
             { post && <p>{ post.body }</p> }
+            { post && <p>{ post.category }</p> }
             <button onClick={handleEdit}>Edit</button>
             <button onClick={handleDelete}>Delete</button>
             <button onClick={handleComment}>Comment</button>

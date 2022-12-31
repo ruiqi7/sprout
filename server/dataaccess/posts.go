@@ -18,7 +18,7 @@ func GetAllPosts(db *sql.DB) (*models.PostList, error) {
 	for rows.Next() {
 		var post models.Post
 		comments := pq.Int64Array{}
-		err := rows.Scan(&post.ID, &post.Username, &post.Title, &post.Body, &post.Time, &comments)
+		err := rows.Scan(&post.ID, &post.Username, &post.Title, &post.Body, &post.Category, &post.Time, &comments)
 		if err != nil {
 			return list, err
 		}
@@ -34,14 +34,14 @@ func GetPost(db *sql.DB, id int) (*models.Post, error) {
 	comments := pq.Int64Array{}
 	queryStr := "SELECT * FROM posts WHERE id=$1"
 	row := db.QueryRow(queryStr, id)
-	err := row.Scan(&post.ID, &post.Username, &post.Title, &post.Body, &post.Time, &comments)
+	err := row.Scan(&post.ID, &post.Username, &post.Title, &post.Body, &post.Category, &post.Time, &comments)
 	post.Comments = []int64(comments)
 	return post, err
 }
 
 func CreatePost(db *sql.DB, post models.Post) error {
-	queryStr := "INSERT INTO posts (username, title, body, time) VALUES ($1, $2, $3, current_timestamp)"
-	_, err := db.Exec(queryStr, post.Username, post.Title, post.Body)
+	queryStr := "INSERT INTO posts (username, title, body, category, time) VALUES ($1, $2, $3, $4, current_timestamp)"
+	_, err := db.Exec(queryStr, post.Username, post.Title, post.Body, post.Category)
 	return err
 }
 
@@ -58,9 +58,9 @@ func DeletePost(db *sql.DB, id int) error {
 	return err
 }
 
-func EditPost(db *sql.DB, id int, title, body string) error {
-	queryStr := "UPDATE posts SET title=$1, body=$2 WHERE id=$3"
-	_, err := db.Exec(queryStr, title, body, id)
+func EditPost(db *sql.DB, post models.Post) error {
+	queryStr := "UPDATE posts SET title=$1, body=$2, category=$3 WHERE id=$4"
+	_, err := db.Exec(queryStr, post.Title, post.Body, post.Category, post.ID)
 	return err
 }
 

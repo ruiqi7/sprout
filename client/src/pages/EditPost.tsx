@@ -12,6 +12,7 @@ const EditPost: React.FC<Props> = ({ post }) => {
     const id = post.id;
     const [title, setTitle] = useState(post.title);
     const [body, setBody] = useState(post.body);
+    const [category, setCategory] = useState(post.category);
     const [backRequested, setBackRequested] = useState(false);
 
     const handleEdit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -20,7 +21,8 @@ const EditPost: React.FC<Props> = ({ post }) => {
             ID: id,
             Username: post.username,
             Title: title,
-            Body: body
+            Body: body,
+            Category: category
         }
         axios.put(`http://localhost:8000/forum/post/${id}`, updatedPost)
     }
@@ -54,6 +56,15 @@ const EditPost: React.FC<Props> = ({ post }) => {
                         value={body} 
                         onChange={e => setBody(e.target.value)}
                         placeholder="Body"
+                    />
+                </div>
+                <div className="form-field">
+                    <input
+                        type="text"
+                        required 
+                        value={category} 
+                        onChange={e => setCategory(e.target.value)}
+                        placeholder="Category"
                     />
                 </div>
                 <button className="edit-button" onClick={handleEdit}>Edit</button>

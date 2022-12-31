@@ -7,6 +7,7 @@ const CreatePost: React.FC = () => {
     const [username, setUsername] = useState("");
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
+    const [category, setCategory] = useState("");
 
     useEffect(() => {
         (async () => {
@@ -20,7 +21,8 @@ const CreatePost: React.FC = () => {
         const post = {
             Username: username,
             Title: title,
-            Body: body
+            Body: body,
+            Category: category
         }
         axios.post("http://localhost:8000/forum/create", post)
             .then(() => navigate("/forum/posts"))
@@ -44,6 +46,15 @@ const CreatePost: React.FC = () => {
                     value={body} 
                     onChange={e => setBody(e.target.value)}
                     placeholder="Body"
+                />
+            </div>
+            <div className="form-field">
+                <input
+                    type="text"
+                    required 
+                    value={category} 
+                    onChange={e => setCategory(e.target.value)}
+                    placeholder="Category"
                 />
             </div>
             <button className="post-button" onClick={handlePost}>Post</button>

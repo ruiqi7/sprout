@@ -14,6 +14,7 @@ const PostCard: React.FC<Props> = ({ post }) => {
             <CardContent>
                 <Typography> {post.title} </Typography>
                 <Typography> {post.body} </Typography>
+                <Typography> {post.category} </Typography>
                 <Typography> {post.username} </Typography>
                 <Typography> {post.time} </Typography>
                 <Link to={`/forum/post/${post.id}`}>

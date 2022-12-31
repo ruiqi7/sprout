@@ -35,7 +35,6 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&post)
 	err = dataaccess.CreatePost(database.GetDB(), post)
 	database.CheckError(err)
-	//w.Write([]byte("Post created!"))
 }
 
 func DeletePost(w http.ResponseWriter, r *http.Request) {
@@ -52,6 +51,6 @@ func DeletePost(w http.ResponseWriter, r *http.Request) {
 func EditPost(w http.ResponseWriter, r *http.Request) {
 	var post models.Post
 	err := json.NewDecoder(r.Body).Decode(&post)
-	err = dataaccess.EditPost(database.GetDB(), post.ID, post.Title, post.Body)
+	err = dataaccess.EditPost(database.GetDB(), post)
 	database.CheckError(err)
 }

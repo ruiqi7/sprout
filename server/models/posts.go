@@ -5,6 +5,7 @@ type Post struct {
 	Username string  `json:"username"`
 	Title    string  `json:"title"`
 	Body     string  `json:"body"`
+	Category string  `json:"category"`
 	Time     string  `json:"time"`
 	Comments []int64 `json:"comments"`
 }

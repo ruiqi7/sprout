@@ -3,6 +3,7 @@ type Post = {
     username: string;
     title: string;
     body: string;
+    category: string;
     time: string;
 }
 
