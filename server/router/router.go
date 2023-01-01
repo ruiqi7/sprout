@@ -20,8 +20,10 @@ func SetUp() http.Handler {
 		r.Route("/forum", func(r chi.Router) {
 			r.Get("/user", handlers.VerifyAuth(handlers.GetUser))
 
-			r.Get("/posts", handlers.VerifyAuth(handlers.GetAllPosts))
-			r.Get("/posts/{search}", handlers.VerifyAuth(handlers.SearchPosts))
+			r.Get("/posts/All", handlers.VerifyAuth(handlers.GetAllPosts))
+			r.Get("/posts/{category}", handlers.VerifyAuth(handlers.SearchByCategory))
+			r.Get("/posts/All/{query}", handlers.VerifyAuth(handlers.SearchByQuery))
+			r.Get("/posts/{category}/{query}", handlers.VerifyAuth(handlers.SearchByCategoryAndQuery))
 			r.Get("/post/{id}", handlers.VerifyAuth(handlers.GetPost))
 			r.Post("/create", handlers.VerifyAuth(handlers.CreatePost))
 			r.Delete("/post/{id}", handlers.VerifyAuth(handlers.DeletePost))

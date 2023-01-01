@@ -55,9 +55,24 @@ func EditPost(w http.ResponseWriter, r *http.Request) {
 	database.CheckError(err)
 }
 
-func SearchPosts(w http.ResponseWriter, r *http.Request) {
-	search := chi.URLParam(r, "search")
-	posts, err := dataaccess.SearchPosts(database.GetDB(), search)
+func SearchByCategory(w http.ResponseWriter, r *http.Request) {
+	category := chi.URLParam(r, "category")
+	posts, err := dataaccess.SearchByCategory(database.GetDB(), category)
+	database.CheckError(err)
+	json.NewEncoder(w).Encode(posts)
+}
+
+func SearchByQuery(w http.ResponseWriter, r *http.Request) {
+	query := chi.URLParam(r, "query")
+	posts, err := dataaccess.SearchByQuery(database.GetDB(), query)
+	database.CheckError(err)
+	json.NewEncoder(w).Encode(posts)
+}
+
+func SearchByCategoryAndQuery(w http.ResponseWriter, r *http.Request) {
+	category := chi.URLParam(r, "category")
+	query := chi.URLParam(r, "query")
+	posts, err := dataaccess.SearchByCategoryAndQuery(database.GetDB(), category, query)
 	database.CheckError(err)
 	json.NewEncoder(w).Encode(posts)
 }

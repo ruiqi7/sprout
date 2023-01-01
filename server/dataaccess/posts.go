@@ -9,30 +9,15 @@ import (
 
 // Solution adapted from https://blog.logrocket.com/how-to-build-a-restful-api-with-docker-postgresql-and-go-chi/
 func GetAllPosts(db *sql.DB) (*models.PostList, error) {
-	list := &models.PostList{}
-	rows, err := db.Query("SELECT * FROM posts ORDER BY time DESC")
-	if err != nil {
-		return list, err
-	}
-	defer rows.Close()
-	for rows.Next() {
-		var post models.Post
-		comments := pq.Int64Array{}
-		err := rows.Scan(&post.ID, &post.Username, &post.Title, &post.Body, &post.Category, &post.Time, &comments)
-		if err != nil {
-			return list, err
-		}
-		post.Comments = []int64(comments)
-		list.Posts = append(list.Posts, post)
-	}
-
-	return list, nil
+	queryStr := "SELECT id, username, title, body, category, time, comments FROM posts ORDER BY time DESC"
+	rows, err := db.Query(queryStr)
+	return getPostList(rows, err)
 }
 
 func GetPost(db *sql.DB, id int) (*models.Post, error) {
 	post := &models.Post{}
 	comments := pq.Int64Array{}
-	queryStr := "SELECT * FROM posts WHERE id=$1"
+	queryStr := "SELECT id, username, title, body, category, time, comments FROM posts WHERE id=$1"
 	row := db.QueryRow(queryStr, id)
 	err := row.Scan(&post.ID, &post.Username, &post.Title, &post.Body, &post.Category, &post.Time, &comments)
 	post.Comments = []int64(comments)
@@ -40,7 +25,7 @@ func GetPost(db *sql.DB, id int) (*models.Post, error) {
 }
 
 func CreatePost(db *sql.DB, post models.Post) error {
-	queryStr := "INSERT INTO posts (username, title, body, category, time) VALUES ($1, $2, $3, $4, current_timestamp)"
+	queryStr := "INSERT INTO posts (username, title, body, category, time, title_tokens, body_tokens) VALUES ($1, $2, $3, $4, current_timestamp, to_tsvector($2), to_tsvector($3))"
 	_, err := db.Exec(queryStr, post.Username, post.Title, post.Body, post.Category)
 	return err
 }
@@ -76,10 +61,29 @@ func DeleteCommentID(db *sql.DB, commentID int) error {
 	return err
 }
 
-func SearchPosts(db *sql.DB, search string) (*models.PostList, error) {
+func SearchByCategory(db *sql.DB, category string) (*models.PostList, error) {
+	queryStr := "SELECT id, username, title, body, category, time, comments FROM posts WHERE category=$1 ORDER BY time DESC"
+	rows, err := db.Query(queryStr, category)
+	return getPostList(rows, err)
+}
+
+func SearchByQuery(db *sql.DB, query string) (*models.PostList, error) {
+	queryStr := "SELECT id, username, title, body, category, time, comments FROM posts WHERE ((title_tokens || body_tokens) @@ to_tsquery($1)) ORDER BY ts_rank(setweight(title_tokens, 'A') || setweight(body_tokens, 'B'), to_tsquery($1)) DESC, time DESC"
+	rows, err := db.Query(queryStr, query)
+	return getPostList(rows, err)
+}
+
+// Solution adapted from
+// https://www.crunchydata.com/blog/postgres-full-text-search-a-search-engine-in-a-database
+// https://dba.stackexchange.com/questions/275359/pg-fulltext-search-boost-factor-for-word-in-the-title
+func SearchByCategoryAndQuery(db *sql.DB, category, query string) (*models.PostList, error) {
+	queryStr := "SELECT id, username, title, body, category, time, comments FROM posts WHERE category=$1 AND ((title_tokens || body_tokens) @@ to_tsquery($2)) ORDER BY ts_rank(setweight(title_tokens, 'A') || setweight(body_tokens, 'B'), to_tsquery($2)) DESC, time DESC"
+	rows, err := db.Query(queryStr, category, query)
+	return getPostList(rows, err)
+}
+
+func getPostList(rows *sql.Rows, err error) (*models.PostList, error) {
 	list := &models.PostList{}
-	queryStr := "SELECT * FROM posts WHERE category=$1 ORDER BY time DESC"
-	rows, err := db.Query(queryStr, search)
 	if err != nil {
 		return list, err
 	}

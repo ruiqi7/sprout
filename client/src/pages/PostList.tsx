@@ -5,23 +5,29 @@ import Post from '../types/Post';
 import PostCard from '../components/PostCard';
 
 // Solution adapted from https://stackoverflow.com/questions/47705112/display-api-data-using-axios-and-a-list-in-react
-class PostList extends React.Component<{ searchRequested: boolean, searchStr: string }> {
+class PostList extends React.Component<{ searchRequested: boolean, category: string, query: string }> {
     state = {
         posts: [] as Post[]
     }
 
     getPosts(searchStr: string) {
-        axios.get("http://localhost:8000/forum/posts" + searchStr)
+        axios.get("http://localhost:8000/forum/posts/" + searchStr)
             .then(res => this.setState(res.data));
     }
 
     componentDidMount(): void {
-        this.getPosts("");
+        this.getPosts("All");
     }
 
-    componentDidUpdate(prevProps: Readonly<{ searchRequested: boolean, searchStr: string }>): void {
+    componentDidUpdate(prevProps: Readonly<{ searchRequested: boolean, category: string, query: string }>): void {
         if (this.props !== prevProps && this.props.searchRequested) {
-            this.getPosts(`/${this.props.searchStr}`);
+            const category = this.props.category;
+            const query = this.props.query;
+            if (query) {
+                this.getPosts(`${category}/${query}`);
+            } else {
+                this.getPosts(`${category}`);
+            }
         }
     }
 

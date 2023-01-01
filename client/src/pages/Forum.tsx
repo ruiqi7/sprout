@@ -4,18 +4,22 @@ import PostList from "./PostList";
 
 const Forum: React.FC = () => {
     const [searchRequested, setSearchRequested] = useState(false);
-    const [category, setCategory] = useState("");
+    const [category, setCategory] = useState("All"); // dropdown menu such that a category must be chosen
+    const [query, setQuery] = useState("");
 
-    const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCategory(e.target.value);
+        setSearchRequested(false);
+    }
+
+    const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setQuery(e.target.value);
         setSearchRequested(false);
     }
 
     const handleSearch = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
-        if (category) {
-            setSearchRequested(true);
-        }
+        setSearchRequested(true);
     }
 
     return (
@@ -27,13 +31,22 @@ const Forum: React.FC = () => {
                         type="text"
                         required 
                         value={category} 
-                        onChange={handleOnChange}
+                        onChange={handleCategoryChange}
                         placeholder="Category"
+                    />
+                </div>
+                <div className="form-field">
+                    <input
+                        type="text"
+                        required 
+                        value={query} 
+                        onChange={handleQueryChange}
+                        placeholder="Search..."
                     />
                 </div>
                 <button className="search-button" onClick={handleSearch}>Search</button>
             </form>
-            <PostList searchRequested={searchRequested} searchStr={category} />
+            <PostList searchRequested={searchRequested} category={category} query={query} />
         </div>
     );
 }
