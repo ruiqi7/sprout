@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import Sprout from '../assets/Sprout';
 import SignedInLinks from './SignedInLinks';
 import SignedOutLinks from './SignedOutLinks';
+import './NavBar.css';
 
 const NavBar: React.FC = () => {
     const [username, setUsername] = useState("");
@@ -15,6 +17,10 @@ const NavBar: React.FC = () => {
     
     return (
         <div className="navbar">
+            <div className="navbar_logo">
+                <Sprout />
+                <span className="navbar_name">SPROUT</span>
+            </div>
             { username ? (<SignedInLinks />) : <SignedOutLinks /> }
         </div>
     );

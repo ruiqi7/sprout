@@ -6,11 +6,11 @@ const SignedInLinks: React.FC = () => {
     
     const handleSignOut = () => {
         axios.post("http://localhost:8000/signout")
-            .then(res => navigate("/"))
+            .then(() => navigate("/"))
     }
     
     return (
-        <ul className="right">
+        <ul className="navbar_links">
             <li><NavLink to='/forum/create'>Create Post</NavLink></li>
             <li><NavLink to='' onClick={handleSignOut}>Sign Out</NavLink></li>
         </ul>

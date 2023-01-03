@@ -1,0 +1,39 @@
+.navbar {
+    background-color: #cff0cc;
+    display: flex;
+    justify-content: space-between;
+    font-family: Verdana, sans-serif;
+    height: 70px;
+}
+
+.navbar_logo {
+    margin: 0 30px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar_name {
+    font-size: 25px;
+    padding: 0 5px;
+    color: black;
+}
+
+.navbar ul {
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.navbar li {
+    list-style-type: none;
+    margin-right: 30px;
+}
+
+.navbar li a {
+    text-decoration: none;
+    color: black;
+}
+
+.navbar li a:hover, a:focus, a:active {
+    color: #aa6155;
+}
