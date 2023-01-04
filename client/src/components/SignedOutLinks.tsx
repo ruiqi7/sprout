@@ -1,9 +1,13 @@
 import { NavLink } from 'react-router-dom';
 
-const SignedOutLinks: React.FC = () => {
+type Props = {
+    back: boolean;
+}
+
+const SignedOutLinks: React.FC<Props> = ({ back }) => {
     return (
         <ul className="navbar_links">
-            <li><NavLink to='/signin'>Sign In</NavLink></li>
+            { back ? <li><NavLink to='/'>Back</NavLink></li> : <li><NavLink to='/signin'>Sign In</NavLink></li> }
         </ul>
     );
 }

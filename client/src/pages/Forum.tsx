@@ -24,7 +24,7 @@ const Forum: React.FC = () => {
 
     return (
         <div className="forum">
-            <NavBar />
+            <NavBar back={false}/>
             <form>
                 <div className="form-field">
                     <input

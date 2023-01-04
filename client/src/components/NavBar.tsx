@@ -5,7 +5,11 @@ import SignedInLinks from './SignedInLinks';
 import SignedOutLinks from './SignedOutLinks';
 import './NavBar.css';
 
-const NavBar: React.FC = () => {
+type Props = {
+    back: boolean;
+}
+
+const NavBar: React.FC<Props> = ({ back }) => {
     const [username, setUsername] = useState("");
     
     useEffect(() => {
@@ -21,7 +25,7 @@ const NavBar: React.FC = () => {
                 <Sprout />
                 <span className="navbar_name">SPROUT</span>
             </div>
-            { username ? (<SignedInLinks />) : <SignedOutLinks /> }
+            { username ? (<SignedInLinks />) : <SignedOutLinks back={back} /> }
         </div>
     );
 }

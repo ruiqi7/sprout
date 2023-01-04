@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Welcoming from '../assets/Welcoming';
+import NavBar from '../components/NavBar';
+import './SignIn.css';
 
 const SignIn: React.FC = () => {
     const navigate = useNavigate();
@@ -16,18 +19,23 @@ const SignIn: React.FC = () => {
     }
 
     return (
-        <form>
-            <div className="form-field">
-                <input
-                    type="text"
-                    required 
-                    value={username} 
-                    onChange={e => setUsername(e.target.value)}
-                    placeholder="Username"
-                />
-            </div>
-            <button className="signin-button" onClick={handleSignIn}>Sign in!</button>
-        </form>
+        <div className="signin">
+            <NavBar back={true}/>
+            <Welcoming className="signin_welcoming"/>
+            <form>
+                <span>Welcome!</span>
+                <div className="signin_username">
+                    <input
+                        type="text"
+                        required 
+                        value={username} 
+                        onChange={e => setUsername(e.target.value)}
+                        placeholder="Username"
+                    />
+                </div>
+                <button className="signin_button" onClick={handleSignIn}>Sign in!</button>
+            </form>
+        </div>
     );
 }
 

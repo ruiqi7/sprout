@@ -5,7 +5,7 @@ import './Home.css';
 const Home: React.FC = () => {
     return (
         <div className="home">
-            <NavBar />
+            <NavBar back={false}/>
             <div className="home_contents">
                 <span className="home_description">Sprout isn't just any discussion forum. It's a space for GROWTH.</span>
                 <div className="home_slogan">
