@@ -1,0 +1,44 @@
+.home_contents {
+    position: relative;
+}
+
+.home_description {
+    position: absolute;
+    left: 100px;
+    transform: translateY(35%);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 50px;
+    font-style: italic;
+    width: 38%;
+    text-align: left;
+    line-height: 80px;
+}
+
+.home_contents svg {
+    position: absolute;
+    right: 100px;
+    bottom: -520px;
+}
+
+.home_slogan {
+    position: absolute;
+    right: 160px;
+    margin: 20px;
+    font-family: 'Merriweather';
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.home_share {
+    vertical-align: -270%;
+}
+
+.home_learn {
+    vertical-align: 0%;
+    margin: 0 60px 0 90px;
+}
+
+.home_grow {
+    vertical-align: 400%;
+    font-style: italic;
+}
