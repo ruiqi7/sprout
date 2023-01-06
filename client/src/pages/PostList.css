@@ -1,0 +1,9 @@
+.postlist {
+    position: absolute;
+    top: 148px;
+    bottom: 20px;
+    height: 440px;
+    overflow: auto;
+    overflow-x: hidden;
+    margin-left: 384px;
+}

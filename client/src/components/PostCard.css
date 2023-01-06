@@ -1,0 +1,63 @@
+.postcard {
+    display: flex;
+    justify-content: space-between;
+    width: 780px;
+    height: 110px;
+    border-color: #f0dbcc;
+    border-width: 0px 2px 2px 2px;
+    border-style: solid;
+    background-color: transparent;
+    padding: 10px 15px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.postcard:nth-child(even) {
+    background-color: #fdf5f1;
+}
+
+.postcard:hover, .postcard:focus, .postcard:active {
+    background-color: lightgrey;
+}
+
+.postcard_left {
+    display: flex;
+    flex-direction: column; 
+    width: 59%;
+    text-align: left;
+}
+
+.postcard_title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.postcard_body {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 8px 0 14px 0;
+    font-size: 15px;
+}
+
+.postcard_info {
+    font-size: 12px;
+}
+
+.postcard_username {
+    font-weight: bold;
+}
+
+.postcard_category {
+    width: 29%;
+    margin-top: 35px;
+    font-size: 14px;
+}
+
+.postcard_comments {
+    width: 12%;
+    margin-top: 35px;
+    font-size: 14px;
+}

@@ -1,7 +1,6 @@
-import { Card, CardContent, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 import Post from '../types/Post';
+import './PostCard.css';
 
 // Solution adapted from https://github.com/CVWO/sample-react-app-2022/blob/master/src/components/CommentItem.tsx
 type Props = {
@@ -9,19 +8,20 @@ type Props = {
 }
 
 const PostCard: React.FC<Props> = ({ post }) => {
+    const navigate = useNavigate();
+
+    console.log(new Date(post.time));
+
     return (
-        <Card>
-            <CardContent>
-                <Typography> {post.title} </Typography>
-                <Typography> {post.body} </Typography>
-                <Typography> {post.category} </Typography>
-                <Typography> {post.username} </Typography>
-                <Typography> {post.time} </Typography>
-                <Link to={`/forum/post/${post.id}`}>
-                    <button>Post Details</button>
-                </Link>
-            </CardContent>
-        </Card>
+        <button className="postcard" onClick={() => navigate(`/forum/post/${post.id}`)}>
+            <div className="postcard_left">
+                <span className="postcard_title">{ post.title }</span>
+                <span className="postcard_body">{ post.body }</span>
+                <span className="postcard_info">Posted by <span className="postcard_username">{ post.username }</span> on { Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'long' , day: 'numeric', hour: 'numeric', minute: '2-digit'}).format(new Date(post.time)) }</span>
+            </div>
+            <span className="postcard_category">{ post.category }</span>
+            <span className="postcard_comments">{ post.comments.length }</span>
+        </button>
     )
 }
 

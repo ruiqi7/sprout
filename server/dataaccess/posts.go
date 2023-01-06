@@ -44,7 +44,7 @@ func DeletePost(db *sql.DB, id int) error {
 }
 
 func EditPost(db *sql.DB, post models.Post) error {
-	queryStr := "UPDATE posts SET title=$1, body=$2, category=$3 WHERE id=$4"
+	queryStr := "UPDATE posts SET title=$1, body=$2, category=$3, title_tokens=to_tsvector($1), body_tokens=to_tsvector($2) WHERE id=$4"
 	_, err := db.Exec(queryStr, post.Title, post.Body, post.Category, post.ID)
 	return err
 }

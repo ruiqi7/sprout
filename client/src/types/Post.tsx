@@ -5,6 +5,7 @@ type Post = {
     body: string;
     category: string;
     time: string;
+    comments: number[];
 }
 
 export default Post;

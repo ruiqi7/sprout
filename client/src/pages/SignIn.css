@@ -7,7 +7,6 @@
     display: flex;
     width: 30%;
     flex-direction: column;
-    justify-content: space-between;
     transform: translateY(70%);
     margin: 0 auto;
 }
@@ -45,6 +44,6 @@
     transition-duration: 0.5s;
 }
 
-.signin_button:hover, button:active {
+.signin_button:hover, .signin_button_focus, .signin_button:active {
     background-color: #cff0cc;
 }
