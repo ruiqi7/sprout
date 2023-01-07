@@ -5,6 +5,7 @@
     padding: 10px 20px 5px 20px;
     box-shadow: -3px 3px 5px #f0dbcc;
     margin: 0 10px;
+    text-align: left;
 }
 
 .comment-card:not(:last-child) {
@@ -17,7 +18,11 @@
 
 .comment-card_info {
     font-size: 12px;
-    margin: 5px 0;
+    margin: 2px 0;
+}
+
+.comment-card_content {
+    margin: 10px 0;
 }
 
 .commment-card_edit {
@@ -27,4 +32,6 @@
 .comment-card_deleted {
     font-size: 14px;
     margin-left: 13px;
+    margin-top: 0;
+    text-align: center;
 }

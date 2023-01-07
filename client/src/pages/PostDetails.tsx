@@ -58,25 +58,27 @@ const PostDetails: React.FC = () => {
     }
 
     return (
-        <div>
+        <div className="post-details">
             <NavBar back={true}/>
-            <div className="post-details">
-                <div>
-                    <span className="post-details_title">{ post.title }</span> 
-                    <span className="post-details_category">{ post.category }</span>
+            <div className="post-details_contents">
+                <div className="post-details_post">
+                    <div>
+                        <span className="post-details_title">{ post.title }</span> 
+                        <span className="post-details_category">{ post.category }</span>
+                    </div>
+                    <p className="post-details_info">Posted by <span className="post-details_username">{ post.username }</span> on { Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'long' , day: 'numeric', hour: 'numeric', minute: '2-digit'}).format(new Date(post.time)) }</p>
+                    <p className="post-details_body">{ post.body }</p>
+                    <p className="post-details_comments"><Messages /><span>{ post.comments.length }</span></p>
+                    { post.username === username
+                        ?  <div className="post-details_modify">
+                                <button className="post-details_edit" onClick={handleEdit}><EditIcon /><span>Edit</span></button>
+                                <button className="post-details_delete" onClick={handleDelete}><DeleteIcon /><span>Delete</span></button>
+                            </div>
+                        :  <div className="post-details_modify">
+                                <button className="post-details_comment" onClick={handleComment}><CommentIcon /><span>Comment</span></button>
+                            </div>
+                    }
                 </div>
-                <p className="post-details_info">Posted by <span className="post-details_username">{ post.username }</span> on { Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'long' , day: 'numeric', hour: 'numeric', minute: '2-digit'}).format(new Date(post.time)) }</p>
-                <p className="post-details_body">{ post.body }</p>
-                <p className="post-details_comments"><Messages /><span>{ post.comments.length }</span></p>
-                { post.username === username
-                    ?  <div className="post-details_modify">
-                            <button className="post-details_edit" onClick={handleEdit}><EditIcon /><span>Edit</span></button>
-                            <button className="post-details_delete" onClick={handleDelete}><DeleteIcon /><span>Delete</span></button>
-                        </div>
-                    :  <div className="post-details_modify">
-                            <button className="post-details_comment" onClick={handleComment}><CommentIcon /><span>Comment</span></button>
-                        </div>
-                }
                 { id && <CommentList id={id} username={username} /> }
             </div>
             { editRequested ? <EditPost post={post} setEditRequested={setEditRequested} /> : <></> }

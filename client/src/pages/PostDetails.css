@@ -1,6 +1,12 @@
-.post-details {
+.post-details_contents {
     position: absolute;
     left: 280px;
+    height: 520px;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-details_post {
     width: 700px;
     font-family: 'Open Sans', sans-serif;
     text-align: left;
@@ -37,8 +43,11 @@
 }
 
 .post-details_body {
-    font-size: 18px;
-    margin: 18px 0;
+    font-size: 16px;
+    margin: 10px 0;
+    padding-right: 5px;
+    overflow: auto;
+    max-height: 110px;
 }
 
 .post-details_comments {
@@ -57,12 +66,14 @@
 }
 
 .post-details_modify {
-    position: absolute;
-    right: 20px;
     display: inline-block;
+    position: relative;
+    width: 158px;
+    text-align: right;
+    left: 20px;
 }
 
-.post-details button {
+.post-details_contents button {
     border: none;
     background-color: transparent;
     padding: 0;
@@ -73,12 +84,12 @@
     font-size: 13px;
 }
 
-.post-details button span {
+.post-details_contents button span {
     padding: 0 5px;
     vertical-align: 5px;
 }
 
-.post-details button:hover, button:active {
+.post-details_contents button:hover, button:active {
     top: -2px;
 }
 

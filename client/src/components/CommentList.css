@@ -1,10 +1,7 @@
 .comment-list {
-    width: fit-content;
-    position: absolute;
-    top: 180px;
-    bottom: 0;
-    height: 310px;
+    width: 754px;
     overflow: auto;
     overflow-x: hidden;
-    margin-left: -32px;
+    margin-left: -10px;
+    margin-top: 25px;
 }

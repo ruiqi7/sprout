@@ -47,7 +47,7 @@ const Popup: React.FC<Props> = ({ header, category, setCategory, title, setTitle
                         required 
                         value={body} 
                         onChange={e => setBody(e.target.value)}
-                        placeholder="Body"
+                        placeholder="What's on your mind?"
                     />
                 </div>
                 <button className="popup_submit" onClick={handleSubmit}>{ buttonText }</button>
