@@ -1,15 +1,17 @@
-import { Card, CardContent, Typography } from '@mui/material';
 import axios from 'axios';
 import { useState } from 'react';
-
+import DeleteIcon from '../assets/DeleteIcon';
+import EditIcon from '../assets/EditIcon';
 import EditComment from '../pages/EditComment';
 import Comment from '../types/Comment';
+import './CommentCard.css';
 
 type Props = {
     comment: Comment;
+    username: string;
 }
 
-const CommentCard: React.FC<Props> = ({ comment }) => {
+const CommentCard: React.FC<Props> = ({ comment, username }) => {
     const [editRequested, setEditRequested] = useState(false);
     const [deleted, setDeleted] = useState(false);
     
@@ -30,20 +32,24 @@ const CommentCard: React.FC<Props> = ({ comment }) => {
 
     if (deleted) {
         return (
-            <h4>Comment deleted!</h4>
+            <p className="comment-card_deleted">[ Comment deleted! ]</p>
         );
     }
 
     return (
-        <Card>
-            <CardContent>
-                <Typography> {comment.content} </Typography>
-                <Typography> {comment.username} </Typography>
-                <Typography> {comment.time} </Typography>
-                <button onClick={handleEdit}>Edit</button>
-                <button onClick={handleDelete}>Delete</button>
-            </CardContent>
-        </Card>
+        <div className="comment-card">
+            <p className="comment-card_info">
+                <b>{ comment.username }</b> commented on <span>{ Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'long' , day: 'numeric', hour: 'numeric', minute: '2-digit'}).format(new Date(comment.time)) }</span>
+            </p>
+            <p className="comment-card_content">{ comment.content }</p>
+            { comment.username === username
+                ? <div>
+                    <button className="commment-card_edit" onClick={handleEdit}><EditIcon /><span>Edit</span></button>
+                    <button onClick={handleDelete}><DeleteIcon /><span>Delete</span></button>
+                  </div>
+                : <></>
+            }
+        </div>
     )
 }
 

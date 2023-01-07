@@ -25,7 +25,7 @@ const NavBar: React.FC<Props> = ({ back }) => {
                 <Sprout />
                 <span className="navbar_name">SPROUT</span>
             </div>
-            { username ? (<SignedInLinks />) : <SignedOutLinks back={back} /> }
+            { username ? (<SignedInLinks back={back} />) : <SignedOutLinks back={back} /> }
         </div>
     );
 }

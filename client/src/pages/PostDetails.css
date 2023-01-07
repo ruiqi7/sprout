@@ -1,0 +1,91 @@
+.post-details {
+    position: absolute;
+    left: 280px;
+    width: 700px;
+    font-family: 'Open Sans', sans-serif;
+    text-align: left;
+    border: 2px solid #f0dbcc;
+    padding: 10px 20px 0 20px;
+    margin-top: 25px;
+    overflow-wrap: break-word;
+    box-shadow: -3px 3px 5px #f0dbcc;
+}
+
+.post-details_title {
+    font-weight: bold;
+    font-size: 22px;
+    margin: 0;
+}
+
+.post-details_category {
+    display: inline-block;
+    background-color: #f0dbcc;
+    font-size: 14px;
+    border-radius: 20px;
+    padding: 2px 8px;
+    margin-left: 10px;
+    vertical-align: 3px;
+}
+
+.post-details_info {
+    font-size: 12px;
+    margin: 5px 0;
+}
+
+.post-details_username {
+    font-weight: bold;
+}
+
+.post-details_body {
+    font-size: 18px;
+    margin: 18px 0;
+}
+
+.post-details_comments {
+    display: inline-block;
+    font-size: 13px;
+    margin: 0;
+    width: 530px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.post-details_comments span {
+    padding: 0 5px;
+    vertical-align: 5px;
+}
+
+.post-details_modify {
+    position: absolute;
+    right: 20px;
+    display: inline-block;
+}
+
+.post-details button {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    position: relative;
+    top: 0;
+    transition: top ease 0.1s;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+}
+
+.post-details button span {
+    padding: 0 5px;
+    vertical-align: 5px;
+}
+
+.post-details button:hover, button:active {
+    top: -2px;
+}
+
+.post-details_edit {
+    margin-right: 25px;
+}
+
+.post-details_deleted {
+    font-size: 18px;
+}

@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React from 'react';
-
 import Comment from '../types/Comment';
 import CommentCard from './CommentCard';
+import './CommentList.css';
 
-class CommentList extends React.Component<{ id: string }> {
+class CommentList extends React.Component<{ id: string, username: string }> {
     state = {
         comments: [] as Comment[]
     }
@@ -17,7 +17,7 @@ class CommentList extends React.Component<{ id: string }> {
     render() {
         return (
             <div className="comment-list">
-                {this.state.comments && this.state.comments.map((comment: Comment) => <CommentCard comment={comment} key={comment.id} />)}
+                {this.state.comments && this.state.comments.map((comment: Comment) => <CommentCard comment={comment} username={this.props.username} key={comment.id} />)}
             </div>
         );
     }

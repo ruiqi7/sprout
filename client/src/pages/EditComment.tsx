@@ -30,7 +30,7 @@ const EditComment: React.FC<Props> = ({ comment }) => {
     if (backRequested) {
         comment.content = content;
         return (
-            <CommentCard comment={comment} />
+            <CommentCard comment={comment} username={comment.username} />
         );
     }
 

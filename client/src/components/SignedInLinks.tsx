@@ -1,7 +1,11 @@
 import axios from 'axios';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-const SignedInLinks: React.FC = () => {
+type Props = {
+    back: boolean;
+}
+
+const SignedInLinks: React.FC<Props> = ({ back }) => {
     const navigate = useNavigate();
     
     const handleSignOut = () => {
@@ -11,7 +15,7 @@ const SignedInLinks: React.FC = () => {
     
     return (
         <ul className="navbar_links">
-            <li><NavLink to='/forum/create'>Create Post</NavLink></li>
+            { back ? <li><NavLink to='/forum/posts'>Back</NavLink></li> : <li><NavLink to='/forum/create'>Create Post</NavLink></li> }
             <li><NavLink to='' onClick={handleSignOut}>Sign Out</NavLink></li>
         </ul>
     );

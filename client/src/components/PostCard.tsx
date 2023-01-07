@@ -17,7 +17,7 @@ const PostCard: React.FC<Props> = ({ post }) => {
             <div className="postcard_left">
                 <span className="postcard_title">{ post.title }</span>
                 <span className="postcard_body">{ post.body }</span>
-                <span className="postcard_info">Posted by <span className="postcard_username">{ post.username }</span> on { Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'long' , day: 'numeric', hour: 'numeric', minute: '2-digit'}).format(new Date(post.time)) }</span>
+                <span className="postcard_info">Posted by <b>{ post.username }</b> on { Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'long' , day: 'numeric', hour: 'numeric', minute: '2-digit'}).format(new Date(post.time)) }</span>
             </div>
             <span className="postcard_category">{ post.category }</span>
             <span className="postcard_comments">{ post.comments.length }</span>
