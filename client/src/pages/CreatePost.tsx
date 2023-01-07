@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import Popup from '../components/Popup';
+import PostPopup from '../components/PostPopup';
 
 type Props = {
     setCreateRequested: React.Dispatch<React.SetStateAction<boolean>>;
@@ -32,7 +32,7 @@ const CreatePost: React.FC<Props> = ({ setCreateRequested }) => {
     }
 
     return (
-        <Popup 
+        <PostPopup 
             header="New Post"
             category={category}
             setCategory={setCategory}

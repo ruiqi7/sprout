@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import Popup from '../components/Popup';
+import PostPopup from '../components/PostPopup';
 import Post from '../types/Post';
 
 type Props = {
@@ -28,7 +28,7 @@ const EditPost: React.FC<Props> = ({ post, setEditRequested }) => {
     }
 
     return (
-        <Popup 
+        <PostPopup 
             header="Edit Post"
             category={category}
             setCategory={setCategory}

@@ -4,7 +4,7 @@ import Comment from '../types/Comment';
 import CommentCard from './CommentCard';
 import './CommentList.css';
 
-class CommentList extends React.Component<{ id: string, username: string }> {
+class CommentList extends React.Component<{ id: string, username: string, setCommentToEdit: React.Dispatch<React.SetStateAction<Comment | undefined>>; }> {
     state = {
         comments: [] as Comment[]
     }
@@ -17,7 +17,14 @@ class CommentList extends React.Component<{ id: string, username: string }> {
     render() {
         return (
             <div className="comment-list">
-                {this.state.comments && this.state.comments.map((comment: Comment) => <CommentCard comment={comment} username={this.props.username} key={comment.id} />)}
+                {this.state.comments.map((comment: Comment) => 
+                    <CommentCard
+                        comment={comment}
+                        username={this.props.username}
+                        setCommentToEdit={this.props.setCommentToEdit}
+                        key={comment.id}
+                    />
+                )}
             </div>
         );
     }

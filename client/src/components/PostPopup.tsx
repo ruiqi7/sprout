@@ -15,7 +15,7 @@ type Props = {
     handleSubmit: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const Popup: React.FC<Props> = ({ header, category, setCategory, title, setTitle, body, setBody, handleClose, buttonText, handleSubmit }) => {
+const PostPopup: React.FC<Props> = ({ header, category, setCategory, title, setTitle, body, setBody, handleClose, buttonText, handleSubmit }) => {
     const categories = ["Education", "Environment", "Health", "Humanities", "Politics", "Science", "Sports", "Technology"];
     
     return (
@@ -48,6 +48,7 @@ const Popup: React.FC<Props> = ({ header, category, setCategory, title, setTitle
                         value={body} 
                         onChange={e => setBody(e.target.value)}
                         placeholder="What's on your mind?"
+                        rows={9}
                     />
                 </div>
                 <button className="popup_submit" onClick={handleSubmit}>{ buttonText }</button>
@@ -56,4 +57,4 @@ const Popup: React.FC<Props> = ({ header, category, setCategory, title, setTitle
     );
 }
 
-export default Popup;
+export default PostPopup;

@@ -1,10 +1,14 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import CommentPopup from '../components/CommentPopup';
 
-const CreateComment: React.FC = () => {
+type Props = {
+    setCommentRequested: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const CreateComment: React.FC<Props> = ({ setCommentRequested }) => {
     const { id } = useParams();
-    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [content, setContent] = useState("");
 
@@ -22,25 +26,18 @@ const CreateComment: React.FC = () => {
             Content: content
         }
         axios.post(`http://localhost:8000/forum/post/${id}/comment`, comment)
-            .then(() => navigate(`/forum/post/${id}`))
+            .then(() => window.location.reload())
     }
 
     return (
-        <form>
-            <div className="form-field">
-                <input
-                    type="text"
-                    required 
-                    value={content} 
-                    onChange={e => setContent(e.target.value)}
-                    placeholder="Reply..."
-                />
-            </div>
-            <button className="comment-button" onClick={handleComment}>Comment</button>
-            <Link to={`/forum/post/${id}`}>
-                <button>Back</button>
-            </Link>
-        </form>
+        <CommentPopup 
+            header="New Comment"
+            content={content}
+            setContent={setContent}
+            handleClose={() => setCommentRequested(false)}
+            buttonText="Comment"
+            handleSubmit={handleComment}
+        />
     );
 }
 

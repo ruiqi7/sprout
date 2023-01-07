@@ -2,32 +2,25 @@ import axios from 'axios';
 import { useState } from 'react';
 import DeleteIcon from '../assets/DeleteIcon';
 import EditIcon from '../assets/EditIcon';
-import EditComment from '../pages/EditComment';
 import Comment from '../types/Comment';
 import './CommentCard.css';
 
 type Props = {
     comment: Comment;
     username: string;
+    setCommentToEdit: React.Dispatch<React.SetStateAction<Comment | undefined>>;
 }
 
-const CommentCard: React.FC<Props> = ({ comment, username }) => {
-    const [editRequested, setEditRequested] = useState(false);
+const CommentCard: React.FC<Props> = ({ comment, username, setCommentToEdit }) => {
     const [deleted, setDeleted] = useState(false);
     
     const handleEdit = () => {
-        setEditRequested(true);
+        setCommentToEdit(comment);
     }
 
     const handleDelete = () => {
         axios.delete(`http://localhost:8000/forum/comment/${comment.id}`);
         setDeleted(true);
-    }
-
-    if (comment && editRequested) {
-        return (
-            <EditComment comment={comment} />
-        );
     }
 
     if (deleted) {

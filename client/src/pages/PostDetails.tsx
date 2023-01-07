@@ -1,24 +1,28 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import CommentIcon from '../assets/CommentIcon';
 import DeleteIcon from '../assets/DeleteIcon';
 import EditIcon from '../assets/EditIcon';
 import Messages from '../assets/Messages';
 import CommentList from '../components/CommentList';
 import NavBar from '../components/NavBar';
+import Comment from '../types/Comment';
 import Post from '../types/Post';
+import CreateComment from './CreateComment';
+import EditComment from './EditComment';
 import EditPost from './EditPost';
 import './PostDetails.css';
 
 const PostDetails: React.FC = () => {
-    const navigate = useNavigate();
     const { id } = useParams();
     const server = `http://localhost:8000/forum/post/${id}`;
     const [post, setPost] = useState<Post>();
-    const [editRequested, setEditRequested] = useState(false);
-    const [deleted, setDeleted] = useState(false);
     const [username, setUsername] = useState("");
+    const [deleted, setDeleted] = useState(false);
+    const [editRequested, setEditRequested] = useState(false);
+    const [commentRequested, setCommentRequested] = useState(false);
+    const [commentToEdit, setCommentToEdit] = useState<Comment>();
 
     useEffect(() => {
         (async () => {
@@ -37,11 +41,6 @@ const PostDetails: React.FC = () => {
     const handleDelete = () => {
         axios.delete(server);
         setDeleted(true);
-    }
-
-    const handleComment = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.preventDefault();
-        navigate(`/forum/post/${id}/comment`);
     }
 
     if (deleted) {
@@ -75,13 +74,15 @@ const PostDetails: React.FC = () => {
                                 <button className="post-details_delete" onClick={handleDelete}><DeleteIcon /><span>Delete</span></button>
                             </div>
                         :  <div className="post-details_modify">
-                                <button className="post-details_comment" onClick={handleComment}><CommentIcon /><span>Comment</span></button>
+                                <button className="post-details_comment" onClick={() => setCommentRequested(true)}><CommentIcon /><span>Comment</span></button>
                             </div>
                     }
                 </div>
-                { id && <CommentList id={id} username={username} /> }
+                { id && <CommentList id={id} username={username} setCommentToEdit={setCommentToEdit} /> }
             </div>
             { editRequested ? <EditPost post={post} setEditRequested={setEditRequested} /> : <></> }
+            { commentRequested ? <CreateComment setCommentRequested={setCommentRequested} /> : <></> }
+            { commentToEdit && <EditComment comment={commentToEdit} setCommentToEdit={setCommentToEdit} /> }
         </div>
      );
 }

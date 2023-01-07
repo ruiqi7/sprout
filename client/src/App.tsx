@@ -4,7 +4,6 @@ import Home from './pages/Home';
 import PostDetails from './pages/PostDetails';
 import SignIn from './pages/SignIn';
 import axios from 'axios';
-import CreateComment from './pages/CreateComment';
 import Forum from './pages/Forum';
 
 function App() { 
@@ -18,7 +17,6 @@ function App() {
             <Route path="/signin" element={<SignIn />} />
             <Route path="/forum/posts" element={<Forum />} />
             <Route path='/forum/post/:id' element={<PostDetails />} />
-            <Route path='/forum/post/:id/comment' element={<CreateComment />} />
           </Routes>
         </BrowserRouter>
     </div>
