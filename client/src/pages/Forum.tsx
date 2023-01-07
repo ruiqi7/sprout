@@ -10,7 +10,7 @@ const Forum: React.FC = () => {
     const [category, setCategory] = useState("All");
     const [query, setQuery] = useState("");
     const [searchRequested, setSearchRequested] = useState(false);
-    const [createPost, setCreatePost] = useState(false);
+    const [createRequested, setCreateRequested] = useState(false);
 
     const handleCategoryChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, category: string) => {
         e.preventDefault();
@@ -31,7 +31,7 @@ const Forum: React.FC = () => {
     return (
         <div className="forum">
             <NavBar back={false} />
-            <a className="forum_create" onClick={() => setCreatePost(true)}>Create Post</a>
+            <a className="forum_create" onClick={() => setCreateRequested(true)}>Create Post</a>
             <form>
                 <div className="forum_category">
                     <span className="forum_filter">Filter by category</span>
@@ -55,7 +55,7 @@ const Forum: React.FC = () => {
                 <span className="forum_comments-header">Comments</span>
             </div>
             <PostList searchRequested={searchRequested} category={category} query={query} />
-            { createPost ? <CreatePost categories={categories.slice(1)} setCreatePost={setCreatePost} /> : <></> }
+            { createRequested ? <CreatePost setCreateRequested={setCreateRequested} /> : <></> }
         </div>
     );
 }

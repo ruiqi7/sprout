@@ -1,4 +1,4 @@
-.create-post_background {
+.popup {
     z-index: 10;
     position: absolute;
     top: 0;
@@ -8,7 +8,7 @@
     background: rgba(150, 150, 150, 0.5);
 }
 
-.create-post {
+.popup_box {
     position: absolute;
     background-color: #f9e7df;
     width: 700px;
@@ -21,33 +21,33 @@
     text-align: left;
 }
 
-.create-post_header {
+.popup_header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.create-post_header span {
+.popup_header span {
     font-size: 18px;
     font-weight: bold;
     padding-top: 5px;
 }
 
-.create-post_close {
+.popup_close {
     border: none;
     background-color: transparent;
     padding: 0;
 }
 
-.create-post_close svg {
+.popup_close svg {
     color: lightgrey;
 }
 
-.create-post_close svg:hover, svg:focus, svg:active {
+.popup_close svg:hover, svg:focus, svg:active {
     color: darkgrey;
 }
 
-.create-post_category select {
+.popup_category select {
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     margin: 18px 0;
@@ -59,19 +59,19 @@
     border-radius: 8px;
 }
 
-.create-post_category select option {
+.popup_category select option {
     color: black;
 }
 
-.create-post_category select:invalid {
+.popup_category select:invalid {
     color: #767676;
 }
 
-.create-post_category select:focus {
+.popup_category select:focus {
     outline: 2px solid lightgrey;
 }
 
-.create-post_title input {
+.popup_title input {
     font-family: 'Open Sans', sans-serif;
     font-size: 18px;
     padding: 0 10px;
@@ -82,11 +82,11 @@
     border-radius: 8px;
 }
 
-.create-post_title input:focus {
+.popup_title input:focus {
     outline: 2px solid lightgrey;
 }
 
-.create-post_body textarea {
+.popup_body textarea {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     padding: 5px 10px;
@@ -98,7 +98,7 @@
     resize: none;
 }
 
-.create-post_body textarea:focus {
+.popup_body textarea:focus {
     outline: 2px solid lightgrey;
 }
 
@@ -106,7 +106,7 @@ textarea::-webkit-scrollbar {
     display: none;
 }
 
-.create-post_post {
+.popup_submit {
     position: relative;
     left: 590px;
     bottom: 6px;
@@ -120,7 +120,7 @@ textarea::-webkit-scrollbar {
     transition-duration: 0.5s;
 }
 
-.create-post_post:hover, .create-post_post:focus, .create-post_post:active {
+.popup_submit:hover, .popup_submit:focus, .popup_submit:active {
     transform: scale(1.1);
     background-color: darkgrey;
 }

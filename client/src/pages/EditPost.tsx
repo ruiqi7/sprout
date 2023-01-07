@@ -1,19 +1,18 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-
+import Popup from '../components/Popup';
 import Post from '../types/Post';
-import PostDetails from './PostDetails';
 
 type Props = {
     post: Post;
+    setEditRequested: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const EditPost: React.FC<Props> = ({ post }) => {
+const EditPost: React.FC<Props> = ({ post, setEditRequested }) => {
     const id = post.id;
     const [title, setTitle] = useState(post.title);
     const [body, setBody] = useState(post.body);
     const [category, setCategory] = useState(post.category);
-    const [backRequested, setBackRequested] = useState(false);
 
     const handleEdit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
@@ -25,52 +24,22 @@ const EditPost: React.FC<Props> = ({ post }) => {
             Category: category
         }
         axios.put(`http://localhost:8000/forum/post/${id}`, updatedPost)
-    }
-
-    const handleBack = () => {
-        setBackRequested(true);
-    }
-
-    if (backRequested) {
-        return (
-            <PostDetails />
-        );
+            .then(() => window.location.reload())
     }
 
     return (
-        <div>
-            <form>
-                <div className="form-field">
-                    <input
-                        type="text"
-                        required 
-                        value={title} 
-                        onChange={e => setTitle(e.target.value)}
-                        placeholder="Title"
-                    />
-                </div>
-                <div className="form-field">
-                    <input
-                        type="text"
-                        required 
-                        value={body} 
-                        onChange={e => setBody(e.target.value)}
-                        placeholder="Body"
-                    />
-                </div>
-                <div className="form-field">
-                    <input
-                        type="text"
-                        required 
-                        value={category} 
-                        onChange={e => setCategory(e.target.value)}
-                        placeholder="Category"
-                    />
-                </div>
-                <button className="edit-button" onClick={handleEdit}>Edit</button>
-            </form>
-            <button onClick={handleBack}>Back</button>
-        </div>
+        <Popup 
+            header="Edit Post"
+            category={category}
+            setCategory={setCategory}
+            title={title}
+            setTitle={setTitle}
+            body={body}
+            setBody={setBody}
+            handleClose={() => setEditRequested(false)}
+            buttonText="Edit"
+            handleSubmit={handleEdit}
+        />
     );
 }
 
