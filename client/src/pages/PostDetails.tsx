@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import CommentIcon from '../assets/CommentIcon';
 import DeleteIcon from '../assets/DeleteIcon';
 import EditIcon from '../assets/EditIcon';

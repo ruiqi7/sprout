@@ -98,3 +98,18 @@
 .forum_category-header {
     margin-left: 400px;
 }
+
+.forum_create {
+    position: absolute;
+    top: 26px;
+    left: 1060px;
+    width: 90px;
+    cursor: pointer;
+    color: black;
+    font-family: Verdana, sans-serif;
+    font-size: 15px;
+}
+
+.forum_create:hover, .forum_create:focus, .forum_create:active {
+    color: darkgrey;
+}

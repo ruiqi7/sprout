@@ -10,8 +10,6 @@ type Props = {
 const PostCard: React.FC<Props> = ({ post }) => {
     const navigate = useNavigate();
 
-    console.log(new Date(post.time));
-
     return (
         <button className="postcard" onClick={() => navigate(`/forum/post/${post.id}`)}>
             <div className="postcard_left">

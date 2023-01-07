@@ -7,7 +7,7 @@ type Props = {
 
 const SignedInLinks: React.FC<Props> = ({ back }) => {
     const navigate = useNavigate();
-    
+
     const handleSignOut = () => {
         axios.post("http://localhost:8000/signout")
             .then(() => navigate("/"))
@@ -15,7 +15,7 @@ const SignedInLinks: React.FC<Props> = ({ back }) => {
     
     return (
         <ul className="navbar_links">
-            { back ? <li><NavLink to='/forum/posts'>Back</NavLink></li> : <li><NavLink to='/forum/create'>Create Post</NavLink></li> }
+            { back ? <li><NavLink to='/forum/posts'>Back</NavLink></li> : <></> }
             <li><NavLink to='' onClick={handleSignOut}>Sign Out</NavLink></li>
         </ul>
     );

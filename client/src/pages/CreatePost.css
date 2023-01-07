@@ -1,0 +1,126 @@
+.create-post_background {
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 1280px;
+    min-height: 609px;
+    background: rgba(150, 150, 150, 0.5);
+}
+
+.create-post {
+    position: absolute;
+    background-color: #f9e7df;
+    width: 700px;
+    height: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px darkgrey;
+    top: 105px;
+    left: 280px;
+    padding: 7px 7px 30px 30px;
+    text-align: left;
+}
+
+.create-post_header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.create-post_header span {
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 5px;
+}
+
+.create-post_close {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
+
+.create-post_close svg {
+    color: lightgrey;
+}
+
+.create-post_close svg:hover, svg:focus, svg:active {
+    color: darkgrey;
+}
+
+.create-post_category select {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    margin: 18px 0;
+    padding: 5px;
+    height: 32px;
+    width: 120px;
+    color: black;
+    border: none;
+    border-radius: 8px;
+}
+
+.create-post_category select option {
+    color: black;
+}
+
+.create-post_category select:invalid {
+    color: #767676;
+}
+
+.create-post_category select:focus {
+    outline: 2px solid lightgrey;
+}
+
+.create-post_title input {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    padding: 0 10px;
+    margin-right: 23px;
+    height: 40px;
+    width: 660px;
+    border: none;
+    border-radius: 8px;
+}
+
+.create-post_title input:focus {
+    outline: 2px solid lightgrey;
+}
+
+.create-post_body textarea {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    padding: 5px 10px;
+    margin: 15px 0;
+    height: 210px;
+    width: 660px;
+    border: none;
+    border-radius: 8px;
+    resize: none;
+}
+
+.create-post_body textarea:focus {
+    outline: 2px solid lightgrey;
+}
+
+textarea::-webkit-scrollbar {
+    display: none;
+}
+
+.create-post_post {
+    position: relative;
+    left: 590px;
+    bottom: 6px;
+    border: none;
+    border-radius: 10px;
+    background-color: lightgrey;
+    padding: 8px 10px;
+    font-family: Verdana, sans-serif;
+    font-size: 14px;
+    width: 90px;
+    transition-duration: 0.5s;
+}
+
+.create-post_post:hover, .create-post_post:focus, .create-post_post:active {
+    transform: scale(1.1);
+    background-color: darkgrey;
+}

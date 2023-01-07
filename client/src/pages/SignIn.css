@@ -44,6 +44,6 @@
     transition-duration: 0.5s;
 }
 
-.signin_button:hover, .signin_button_focus, .signin_button:active {
+.signin_button:hover, .signin_button:focus, .signin_button:active {
     background-color: #cff0cc;
 }
