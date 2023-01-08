@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import Post from '../types/Post';
+import Post from '../../types/Post';
 import './PostCard.css';
 
 // Solution adapted from https://github.com/CVWO/sample-react-app-2022/blob/master/src/components/CommentItem.tsx

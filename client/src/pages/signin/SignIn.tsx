@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Welcoming from '../assets/Welcoming';
-import NavBar from '../components/NavBar';
+import Welcoming from '../../assets/Welcoming';
+import NavBar from '../../components/navbar/NavBar';
 import './SignIn.css';
 
 const SignIn: React.FC = () => {

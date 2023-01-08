@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import PostPopup from '../components/PostPopup';
+import PostPopup from '../../components/popups/PostPopup';
 
 type Props = {
     setCreateRequested: React.Dispatch<React.SetStateAction<boolean>>;

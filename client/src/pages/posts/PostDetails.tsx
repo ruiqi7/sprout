@@ -1,16 +1,16 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import CommentIcon from '../assets/CommentIcon';
-import DeleteIcon from '../assets/DeleteIcon';
-import EditIcon from '../assets/EditIcon';
-import Messages from '../assets/Messages';
-import CommentList from '../components/CommentList';
-import NavBar from '../components/NavBar';
-import Comment from '../types/Comment';
-import Post from '../types/Post';
-import CreateComment from './CreateComment';
-import EditComment from './EditComment';
+import CommentIcon from '../../assets/CommentIcon';
+import DeleteIcon from '../../assets/DeleteIcon';
+import EditIcon from '../../assets/EditIcon';
+import MessagesIcon from '../../assets/MessagesIcon';
+import CommentList from '../../components/comments/CommentList';
+import NavBar from '../../components/navbar/NavBar';
+import Comment from '../../types/Comment';
+import Post from '../../types/Post';
+import CreateComment from '../comments/CreateComment';
+import EditComment from '../comments/EditComment';
 import EditPost from './EditPost';
 import './PostDetails.css';
 
@@ -67,7 +67,7 @@ const PostDetails: React.FC = () => {
                     </div>
                     <p className="post-details_info">Posted by <span className="post-details_username">{ post.username }</span> on { Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'long' , day: 'numeric', hour: 'numeric', minute: '2-digit'}).format(new Date(post.time)) }</p>
                     <p className="post-details_body">{ post.body }</p>
-                    <p className="post-details_comments"><Messages /><span>{ post.comments.length }</span></p>
+                    <p className="post-details_comments"><MessagesIcon /><span>{ post.comments.length }</span></p>
                     { post.username === username
                         ?  <div className="post-details_modify">
                                 <button className="post-details_edit" onClick={handleEdit}><EditIcon /><span>Edit</span></button>

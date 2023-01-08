@@ -89,7 +89,7 @@
     vertical-align: 5px;
 }
 
-.post-details_contents button:hover, button:active {
+.post-details_contents button:hover, .post-details_contents button:active {
     top: -2px;
 }
 

@@ -1,6 +1,6 @@
 import { SVGProps } from 'react';
 
-const Messages = (props: SVGProps<SVGSVGElement>) => (
+const MessagesIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="icon icon-tabler icon-tabler-messages"
@@ -19,4 +19,4 @@ const Messages = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 )
 
-export default Messages;
+export default MessagesIcon;

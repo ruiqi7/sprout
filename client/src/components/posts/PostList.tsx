@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
-import Post from '../types/Post';
-import PostCard from '../components/PostCard';
+import Post from '../../types/Post';
+import PostCard from './PostCard';
 import './PostList.css';
 
 // Solution adapted from https://stackoverflow.com/questions/47705112/display-api-data-using-axios-and-a-list-in-react

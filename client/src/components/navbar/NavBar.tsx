@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Sprout from '../assets/Sprout';
+import Sprout from '../../assets/Sprout';
 import SignedInLinks from './SignedInLinks';
 import SignedOutLinks from './SignedOutLinks';
 import './NavBar.css';

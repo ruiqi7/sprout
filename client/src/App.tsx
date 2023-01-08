@@ -1,10 +1,10 @@
-import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Home from './pages/Home';
-import PostDetails from './pages/PostDetails';
-import SignIn from './pages/SignIn';
 import axios from 'axios';
-import Forum from './pages/Forum';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Home from './pages/home/Home';
+import SignIn from './pages/signin/SignIn';
+import Forum from './pages/forum/Forum';
+import PostDetails from './pages/posts/PostDetails';
+import './App.css';
 
 function App() { 
   // Solution adapted from https://stackoverflow.com/questions/43002444/make-axios-send-cookies-in-its-requests-automatically

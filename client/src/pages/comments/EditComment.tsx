@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import CommentPopup from '../components/CommentPopup';
-import Comment from '../types/Comment';
+import CommentPopup from '../../components/popups/CommentPopup';
+import Comment from '../../types/Comment';
 
 type Props = {
     comment: Comment;

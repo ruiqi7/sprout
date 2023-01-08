@@ -1,6 +1,6 @@
 import { SVGProps } from 'react';
 
-const Search = (props: SVGProps<SVGSVGElement>) => (
+const SearchIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="icon icon-tabler icon-tabler-search"
@@ -20,4 +20,4 @@ const Search = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 )
 
-export default Search;
+export default SearchIcon;

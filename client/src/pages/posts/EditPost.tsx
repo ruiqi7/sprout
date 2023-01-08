@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import PostPopup from '../components/PostPopup';
-import Post from '../types/Post';
+import PostPopup from '../../components/popups/PostPopup';
+import Post from '../../types/Post';
 
 type Props = {
     post: Post;

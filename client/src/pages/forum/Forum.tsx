@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import NavBar from "../components/NavBar";
-import PostList from "./PostList";
-import Search from "../assets/Search";
-import CreatePost from "./CreatePost";
+import NavBar from "../../components/navbar/NavBar";
+import PostList from "../../components/posts/PostList";
+import SearchIcon from "../../assets/SearchIcon";
+import CreatePost from "../posts/CreatePost";
 import './Forum.css';
 
 const Forum: React.FC = () => {
@@ -12,9 +12,9 @@ const Forum: React.FC = () => {
     const [searchRequested, setSearchRequested] = useState(false);
     const [createRequested, setCreateRequested] = useState(false);
 
-    const handleCategoryChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, category: string) => {
+    const handleCategoryChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, item: string) => {
         e.preventDefault();
-        setCategory(category);
+        setCategory(item);
         setSearchRequested(true);
     }
 
@@ -35,7 +35,7 @@ const Forum: React.FC = () => {
             <form>
                 <div className="forum_category">
                     <span className="forum_filter">Filter by category</span>
-                    { categories.map(item => <button className="forum_button" style={{ fontWeight: category === item ? 'bold' : 'normal' }} onClick={e => handleCategoryChange(e, item)} key={item}>{ item }</button>) }
+                    { categories.map(item => <button type="button" className="forum_button" style={{ fontWeight: category === item ? 'bold' : 'normal' }} onClick={e => handleCategoryChange(e, item)} key={item}>{ item }</button>) }
                 </div>
                 <div className="forum_query">
                     <input
@@ -45,8 +45,8 @@ const Forum: React.FC = () => {
                         placeholder="Search..."
                     />
                 </div>
-                <button className="forum_search" onClick={handleSearch}>
-                    <Search />
+                <button className="forum_search" onClick={handleSearch} >
+                    <SearchIcon />
                 </button>
             </form>
             <div className="forum_headers">

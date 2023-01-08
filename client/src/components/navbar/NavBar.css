@@ -35,6 +35,6 @@
     font-size: 15px;
 }
 
-.navbar li a:hover, a:focus, a:active {
+.navbar li a:hover, .navbar li a:focus, .navbar li a:active {
     color: darkgrey;
 }

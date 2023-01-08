@@ -40,11 +40,11 @@
 }
 
 .popup_close svg {
-    color: lightgrey;
+    color: darkgrey;
 }
 
 .popup_close svg:hover, svg:focus, svg:active {
-    color: darkgrey;
+    color: #828282;
 }
 
 .popup_category select {

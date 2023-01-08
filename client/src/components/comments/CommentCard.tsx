@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useState } from 'react';
-import DeleteIcon from '../assets/DeleteIcon';
-import EditIcon from '../assets/EditIcon';
-import Comment from '../types/Comment';
+import DeleteIcon from '../../assets/DeleteIcon';
+import EditIcon from '../../assets/EditIcon';
+import Comment from '../../types/Comment';
 import './CommentCard.css';
 
 type Props = {

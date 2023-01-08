@@ -1,5 +1,5 @@
-import Blooming from '../assets/Blooming';
-import NavBar from '../components/NavBar';
+import Blooming from '../../assets/Blooming';
+import NavBar from '../../components/navbar/NavBar';
 import './Home.css';
 
 const Home: React.FC = () => {

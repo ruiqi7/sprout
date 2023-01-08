@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import Comment from '../types/Comment';
+import Comment from '../../types/Comment';
 import CommentCard from './CommentCard';
 import './CommentList.css';
 
@@ -17,7 +17,7 @@ class CommentList extends React.Component<{ id: string, username: string, setCom
     render() {
         return (
             <div className="comment-list">
-                {this.state.comments.map((comment: Comment) => 
+                {this.state.comments && this.state.comments.map((comment: Comment) => 
                     <CommentCard
                         comment={comment}
                         username={this.props.username}
