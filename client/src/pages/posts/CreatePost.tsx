@@ -23,8 +23,8 @@ const CreatePost: React.FC<Props> = ({ setCreateRequested }) => {
         e.preventDefault();
         const post = {
             Username: username,
-            Title: title,
-            Body: body,
+            Title: title.trim(),
+            Body: body.trim(),
             Category: category
         }
         axios.post("http://localhost:8000/forum/create", post)

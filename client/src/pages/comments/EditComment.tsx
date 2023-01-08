@@ -17,7 +17,7 @@ const EditComment: React.FC<Props> = ({ comment, setCommentToEdit }) => {
         const updatedComment = {
             ID: id,
             Username: comment.username,
-            Content: content
+            Content: content.trim()
         }
         axios.put(`http://localhost:8000/forum/comment/${id}`, updatedComment)
             .then(() => window.location.reload())

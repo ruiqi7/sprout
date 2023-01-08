@@ -23,7 +23,7 @@ const CreateComment: React.FC<Props> = ({ setCommentRequested }) => {
         e.preventDefault();
         const comment = {
             Username: username,
-            Content: content
+            Content: content.trim()
         }
         axios.post(`http://localhost:8000/forum/post/${id}/comment`, comment)
             .then(() => window.location.reload())

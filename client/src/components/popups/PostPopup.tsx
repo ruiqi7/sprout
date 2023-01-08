@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CloseIcon from '../../assets/CloseIcon';
 import './Popup.css';
 
@@ -17,10 +17,20 @@ type Props = {
 
 const PostPopup: React.FC<Props> = ({ header, category, setCategory, title, setTitle, body, setBody, handleClose, buttonText, handleSubmit }) => {
     const categories = ["Education", "Environment", "Health", "Humanities", "Politics", "Science", "Sports", "Technology"];
-    
+    const [error, setError] = useState("");
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
+        if (!category || !title.trim() || !body.trim()) {
+            setError("Please fill in all the fields.");
+            return
+        }
+        handleSubmit(e);
+    }
+
     return (
         <div className="popup">
-            <form className="popup_box">
+            <form className="popup_box" noValidate>
                 <div className="popup_header">
                     <span>{ header }</span>
                     <button className="popup_close" onClick={handleClose}>
@@ -36,7 +46,6 @@ const PostPopup: React.FC<Props> = ({ header, category, setCategory, title, setT
                 <div className="popup_title">
                     <input
                         type="text"
-                        required 
                         value={title} 
                         onChange={e => setTitle(e.target.value)}
                         placeholder="Title"
@@ -44,14 +53,14 @@ const PostPopup: React.FC<Props> = ({ header, category, setCategory, title, setT
                 </div>
                 <div className="popup_body">
                     <textarea
-                        required 
                         value={body} 
                         onChange={e => setBody(e.target.value)}
                         placeholder="What's on your mind?"
                         rows={9}
                     />
                 </div>
-                <button className="popup_submit" onClick={handleSubmit}>{ buttonText }</button>
+                <button className="popup_submit" onClick={handleClick}>{ buttonText }</button>
+                <span className="popup_error">{ error }</span>
             </form>
         </div>
     );

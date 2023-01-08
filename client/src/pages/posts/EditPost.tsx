@@ -19,8 +19,8 @@ const EditPost: React.FC<Props> = ({ post, setEditRequested }) => {
         const updatedPost = {
             ID: id,
             Username: post.username,
-            Title: title,
-            Body: body,
+            Title: title.trim(),
+            Body: body.trim(),
             Category: category
         }
         axios.put(`http://localhost:8000/forum/post/${id}`, updatedPost)

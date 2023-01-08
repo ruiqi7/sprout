@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CloseIcon from '../../assets/CloseIcon';
 import './Popup.css';
 
@@ -12,6 +12,17 @@ type Props = {
 }
 
 const CommentPopup: React.FC<Props> = ({ header, content, setContent, handleClose, buttonText, handleSubmit }) => {
+    const [error, setError] = useState("");
+    
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
+        if (!content.trim()) {
+            setError("Please fill in the field.");
+            return
+        }
+        handleSubmit(e);
+    }
+
     return (
         <div className="popup">
             <form className="popup_box">
@@ -22,15 +33,15 @@ const CommentPopup: React.FC<Props> = ({ header, content, setContent, handleClos
                     </button>
                 </div>
                 <div className="popup_body">
-                    <textarea
-                        required 
+                    <textarea 
                         value={content} 
                         onChange={e => setContent(e.target.value)}
                         placeholder="Share your thoughts!"
                         rows={14}
                     />
                 </div>
-                <button className="popup_submit" onClick={handleSubmit}>{ buttonText }</button>
+                <button className="popup_submit" onClick={handleClick}>{ buttonText }</button>
+                <span className="popup_error">{ error }</span>
             </form>
         </div>
     );

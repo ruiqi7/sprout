@@ -8,14 +8,20 @@ import './SignIn.css';
 const SignIn: React.FC = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
+    const [error, setError] = useState("");
     
     const handleSignIn = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
+        const input = username.trim();
+        if (!input) {
+            setError("Please enter a username.");
+            return
+        }
         const user = {
-            Username: username
+            Username: input
         }
         axios.post("http://localhost:8000/signin", user)
-            .then(() => navigate("/forum/posts"))
+            .then(() => navigate("/forum/posts"));
     }
 
     return (
@@ -23,17 +29,17 @@ const SignIn: React.FC = () => {
             <NavBar back={true}/>
             <Welcoming className="signin_welcoming"/>
             <form>
-                <span>Welcome!</span>
+                <span className="signin_welcome">Welcome!</span>
                 <div className="signin_username">
                     <input
                         type="text"
-                        required 
                         value={username} 
                         onChange={e => setUsername(e.target.value)}
                         placeholder="Username"
                     />
                 </div>
                 <button className="signin_button" onClick={handleSignIn}>Sign in!</button>
+                <span className="signin_error">{ error }</span>
             </form>
         </div>
     );
