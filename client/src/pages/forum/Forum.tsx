@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import NavBar from "../../components/navbar/NavBar";
-import PostList from "../../components/posts/PostList";
-import SearchIcon from "../../assets/SearchIcon";
-import CreatePost from "../posts/CreatePost";
+import React, { useState } from 'react';
+import NavBar from '../../components/navbar/NavBar';
+import PostList from '../../components/posts/PostList';
+import SearchIcon from '../../assets/SearchIcon';
+import CreatePost from '../posts/CreatePost';
+import Error from '../error/Error';
 import './Forum.css';
 
 const Forum: React.FC = () => {
@@ -11,6 +12,7 @@ const Forum: React.FC = () => {
     const [query, setQuery] = useState("");
     const [searchRequested, setSearchRequested] = useState(false);
     const [createRequested, setCreateRequested] = useState(false);
+    const [statusCode, setStatusCode] = useState(200);
 
     const handleCategoryChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, item: string) => {
         e.preventDefault();
@@ -28,9 +30,13 @@ const Forum: React.FC = () => {
         setSearchRequested(true);
     }
 
+    if (statusCode >= 400) {
+        return <Error code={statusCode} />
+    }
+
     return (
         <div className="forum">
-            <NavBar back={false} />
+            <NavBar back={false} setStatusCode={setStatusCode} />
             <a className="forum_create" onClick={() => setCreateRequested(true)}>Create Post</a>
             <form>
                 <div className="forum_category">
@@ -54,8 +60,8 @@ const Forum: React.FC = () => {
                 <span className="forum_category-header">Category</span>
                 <span className="forum_comments-header">Comments</span>
             </div>
-            <PostList searchRequested={searchRequested} category={category} query={query} />
-            { createRequested ? <CreatePost setCreateRequested={setCreateRequested} /> : <></> }
+            <PostList searchRequested={searchRequested} category={category} query={query} setStatusCode={setStatusCode} />
+            { createRequested ? <CreatePost setCreateRequested={setCreateRequested} setStatusCode={setStatusCode} /> : <></> }
         </div>
     );
 }

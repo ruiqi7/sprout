@@ -11,6 +11,7 @@ import Comment from '../../types/Comment';
 import Post from '../../types/Post';
 import CreateComment from '../comments/CreateComment';
 import EditComment from '../comments/EditComment';
+import Error from '../error/Error';
 import EditPost from './EditPost';
 import './PostDetails.css';
 
@@ -23,14 +24,23 @@ const PostDetails: React.FC = () => {
     const [editRequested, setEditRequested] = useState(false);
     const [commentRequested, setCommentRequested] = useState(false);
     const [commentToEdit, setCommentToEdit] = useState<Comment>();
+    const [statusCode, setStatusCode] = useState(200);
 
     useEffect(() => {
         (async () => {
-            let res = await axios.get(server);
-            setPost(res.data);
+            try {
+                let res = await axios.get(server);
+                setPost(res.data);
 
-            res = await axios.get("http://localhost:8000/user");
-            setUsername(res.data);
+                res = await axios.get("http://localhost:8000/forum/user");
+                setUsername(res.data);
+            } catch (err) {
+                if (axios.isAxiosError(err) && err.response) {
+                    setStatusCode(err.response.status);
+                } else {
+                    setStatusCode(400);
+                }
+            }
         })();
     }, []);
 
@@ -43,22 +53,26 @@ const PostDetails: React.FC = () => {
         setDeleted(true);
     }
 
+    if (statusCode >= 400) {
+        return <Error code={statusCode} />
+    }
+
     if (deleted) {
         return (
             <div>
-                <NavBar back={true}/>
+                <NavBar back={true} setStatusCode={setStatusCode} />
                 <p className="post-details_deleted">[ Post deleted! ]</p>
             </div>
         );
     }
 
     if (!post) {
-        return <NavBar back={true}/>
+        return <NavBar back={true} setStatusCode={setStatusCode} />
     }
 
     return (
         <div className="post-details">
-            <NavBar back={true}/>
+            <NavBar back={true} setStatusCode={setStatusCode} />
             <div className="post-details_contents">
                 <div className="post-details_post">
                     <div>
@@ -78,11 +92,11 @@ const PostDetails: React.FC = () => {
                             </div>
                     }
                 </div>
-                { id && <CommentList id={id} username={username} setCommentToEdit={setCommentToEdit} /> }
+                { id && <CommentList id={id} username={username} setCommentToEdit={setCommentToEdit} setStatusCode={setStatusCode} /> }
             </div>
-            { editRequested ? <EditPost post={post} setEditRequested={setEditRequested} /> : <></> }
-            { commentRequested ? <CreateComment setCommentRequested={setCommentRequested} /> : <></> }
-            { commentToEdit && <EditComment comment={commentToEdit} setCommentToEdit={setCommentToEdit} /> }
+            { editRequested ? <EditPost post={post} setEditRequested={setEditRequested} setStatusCode={setStatusCode} /> : <></> }
+            { commentRequested ? <CreateComment setCommentRequested={setCommentRequested} setStatusCode={setStatusCode} /> : <></> }
+            { commentToEdit && <EditComment comment={commentToEdit} setCommentToEdit={setCommentToEdit} setStatusCode={setStatusCode} /> }
         </div>
      );
 }

@@ -6,9 +6,10 @@ import Comment from '../../types/Comment';
 type Props = {
     comment: Comment;
     setCommentToEdit: React.Dispatch<React.SetStateAction<Comment | undefined>>;
+    setStatusCode: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const EditComment: React.FC<Props> = ({ comment, setCommentToEdit }) => {
+const EditComment: React.FC<Props> = ({ comment, setCommentToEdit, setStatusCode }) => {
     const id = comment.id;
     const [content, setContent] = useState(comment.content);
 
@@ -21,6 +22,7 @@ const EditComment: React.FC<Props> = ({ comment, setCommentToEdit }) => {
         }
         axios.put(`http://localhost:8000/forum/comment/${id}`, updatedComment)
             .then(() => window.location.reload())
+            .catch(err => setStatusCode(err.response.status));
     }
 
     return (

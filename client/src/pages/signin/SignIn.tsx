@@ -3,12 +3,14 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Welcoming from '../../assets/Welcoming';
 import NavBar from '../../components/navbar/NavBar';
+import Error from '../error/Error';
 import './SignIn.css';
 
 const SignIn: React.FC = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [error, setError] = useState("");
+    const [statusCode, setStatusCode] = useState(200);
     
     const handleSignIn = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
@@ -21,12 +23,17 @@ const SignIn: React.FC = () => {
             Username: input
         }
         axios.post("http://localhost:8000/signin", user)
-            .then(() => navigate("/forum/posts"));
+            .then(() => navigate("/forum/posts"))
+            .catch(err => setStatusCode(err.response.status));
+    }
+
+    if (statusCode >= 400) {
+        return <Error code={statusCode} />
     }
 
     return (
         <div className="signin">
-            <NavBar back={true}/>
+            <NavBar back={true} setStatusCode={setStatusCode} />
             <Welcoming className="signin_welcoming"/>
             <form>
                 <span className="signin_welcome">Welcome!</span>

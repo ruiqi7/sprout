@@ -5,17 +5,26 @@ import CommentPopup from '../../components/popups/CommentPopup';
 
 type Props = {
     setCommentRequested: React.Dispatch<React.SetStateAction<boolean>>;
+    setStatusCode: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const CreateComment: React.FC<Props> = ({ setCommentRequested }) => {
+const CreateComment: React.FC<Props> = ({ setCommentRequested, setStatusCode }) => {
     const { id } = useParams();
     const [username, setUsername] = useState("");
     const [content, setContent] = useState("");
 
     useEffect(() => {
         (async () => {
-            const res = await axios.get("http://localhost:8000/forum/user");
-            setUsername(res.data);
+            try {
+                const res = await axios.get("http://localhost:8000/forum/user");
+                setUsername(res.data);
+            } catch (err) {
+                if (axios.isAxiosError(err) && err.response) {
+                    setStatusCode(err.response.status);
+                } else {
+                    setStatusCode(400);
+                }
+            }
         })();
     }, []);
 
@@ -27,6 +36,7 @@ const CreateComment: React.FC<Props> = ({ setCommentRequested }) => {
         }
         axios.post(`http://localhost:8000/forum/post/${id}/comment`, comment)
             .then(() => window.location.reload())
+            .catch(err => setStatusCode(err.response.status));
     }
 
     return (

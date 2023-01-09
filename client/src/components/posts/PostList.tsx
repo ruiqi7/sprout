@@ -5,14 +5,15 @@ import PostCard from './PostCard';
 import './PostList.css';
 
 // Solution adapted from https://stackoverflow.com/questions/47705112/display-api-data-using-axios-and-a-list-in-react
-class PostList extends React.Component<{ searchRequested: boolean, category: string, query: string }> {
+class PostList extends React.Component<{ searchRequested: boolean, category: string, query: string, setStatusCode: React.Dispatch<React.SetStateAction<number>> }> {
     state = {
         posts: [] as Post[]
     }
 
     getPosts(searchStr: string) {
         axios.get("http://localhost:8000/forum/posts/" + searchStr)
-            .then(res => this.setState(res.data));
+            .then(res => this.setState(res.data))
+            .catch(err => this.props.setStatusCode(err.response.status));
     }
 
     componentDidMount(): void {

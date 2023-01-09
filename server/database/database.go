@@ -3,6 +3,7 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	"log"
 
 	_ "github.com/lib/pq"
 )
@@ -15,23 +16,26 @@ const (
 	dbname   = "forum"
 )
 
+var db *sql.DB
+
 // Solution below adapted from https://medium.com/swlh/building-a-restful-api-with-go-and-postgresql-494819f51810
-func GetDB() *sql.DB {
+func ConnectDB() *sql.DB {
 	connStr := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)
 
-	db, err := sql.Open("postgres", connStr)
-	CheckError(err)
+	database, err := sql.Open("postgres", connStr)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
-	err = db.Ping()
-	CheckError(err)
-
-	fmt.Println("The database is connected!")
+	db = database
 	return db
 }
 
-func CheckError(err error) {
+func GetDB() *sql.DB {
+	err := db.Ping()
 	if err != nil {
-		panic(err)
+		log.Fatalln(err)
 	}
+	return db
 }

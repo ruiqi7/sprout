@@ -4,14 +4,15 @@ import Comment from '../../types/Comment';
 import CommentCard from './CommentCard';
 import './CommentList.css';
 
-class CommentList extends React.Component<{ id: string, username: string, setCommentToEdit: React.Dispatch<React.SetStateAction<Comment | undefined>>; }> {
+class CommentList extends React.Component<{ id: string, username: string, setCommentToEdit: React.Dispatch<React.SetStateAction<Comment | undefined>>, setStatusCode: React.Dispatch<React.SetStateAction<number>> }> {
     state = {
         comments: [] as Comment[]
     }
     
     componentDidMount() {
         axios.get(`http://localhost:8000/forum/post/${this.props.id}/comments`)
-            .then(res => this.setState(res.data));
+            .then(res => this.setState(res.data))
+            .catch(err => this.props.setStatusCode(err.response.status));
     }
 
     render() {
@@ -22,6 +23,7 @@ class CommentList extends React.Component<{ id: string, username: string, setCom
                         comment={comment}
                         username={this.props.username}
                         setCommentToEdit={this.props.setCommentToEdit}
+                        setStatusCode={this.props.setStatusCode}
                         key={comment.id}
                     />
                 )}

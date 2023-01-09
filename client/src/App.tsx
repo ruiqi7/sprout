@@ -4,6 +4,7 @@ import Home from './pages/home/Home';
 import SignIn from './pages/signin/SignIn';
 import Forum from './pages/forum/Forum';
 import PostDetails from './pages/posts/PostDetails';
+import Error from './pages/error/Error';
 import './App.css';
 
 function App() { 
@@ -17,6 +18,7 @@ function App() {
             <Route path="/signin" element={<SignIn />} />
             <Route path="/forum/posts" element={<Forum />} />
             <Route path='/forum/post/:id' element={<PostDetails />} />
+            <Route path ="*" element ={<Error code={404} />} />
           </Routes>
         </BrowserRouter>
     </div>

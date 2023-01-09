@@ -6,9 +6,10 @@ import Post from '../../types/Post';
 type Props = {
     post: Post;
     setEditRequested: React.Dispatch<React.SetStateAction<boolean>>;
+    setStatusCode: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const EditPost: React.FC<Props> = ({ post, setEditRequested }) => {
+const EditPost: React.FC<Props> = ({ post, setEditRequested, setStatusCode }) => {
     const id = post.id;
     const [title, setTitle] = useState(post.title);
     const [body, setBody] = useState(post.body);
@@ -25,6 +26,7 @@ const EditPost: React.FC<Props> = ({ post, setEditRequested }) => {
         }
         axios.put(`http://localhost:8000/forum/post/${id}`, updatedPost)
             .then(() => window.location.reload())
+            .catch(err => setStatusCode(err.response.status));
     }
 
     return (

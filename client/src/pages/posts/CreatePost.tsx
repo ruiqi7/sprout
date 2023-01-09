@@ -4,9 +4,10 @@ import PostPopup from '../../components/popups/PostPopup';
 
 type Props = {
     setCreateRequested: React.Dispatch<React.SetStateAction<boolean>>;
+    setStatusCode: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const CreatePost: React.FC<Props> = ({ setCreateRequested }) => {
+const CreatePost: React.FC<Props> = ({ setCreateRequested, setStatusCode }) => {
     const [username, setUsername] = useState("");
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
@@ -14,8 +15,16 @@ const CreatePost: React.FC<Props> = ({ setCreateRequested }) => {
 
     useEffect(() => {
         (async () => {
-            const res = await axios.get("http://localhost:8000/forum/user");
-            setUsername(res.data);
+            try {
+                const res = await axios.get("http://localhost:8000/forum/user");
+                setUsername(res.data);
+            } catch (err) {
+                if (axios.isAxiosError(err) && err.response) {
+                    setStatusCode(err.response.status);
+                } else {
+                    setStatusCode(400);
+                }
+            }
         })();
     }, []);
 
@@ -27,8 +36,9 @@ const CreatePost: React.FC<Props> = ({ setCreateRequested }) => {
             Body: body.trim(),
             Category: category
         }
-        axios.post("http://localhost:8000/forum/create", post)
+        axios.post("http://localhost:8000/forum/post/create", post)
             .then(() => window.location.reload())
+            .catch(err => setStatusCode(err.response.status));
     }
 
     return (

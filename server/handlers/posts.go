@@ -13,7 +13,11 @@ import (
 
 func GetAllPosts(w http.ResponseWriter, r *http.Request) {
 	posts, err := dataaccess.GetAllPosts(database.GetDB())
-	database.CheckError(err)
+	if err != nil {
+		http.Error(w, http.StatusText(500), 500)
+		return
+	}
+
 	json.NewEncoder(w).Encode(posts)
 }
 
@@ -21,11 +25,15 @@ func GetPost(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 	num, err := strconv.Atoi(id)
 	if err != nil {
-		w.WriteHeader(404)
+		http.Error(w, http.StatusText(404), 404)
 		return
 	}
+
 	post, err := dataaccess.GetPost(database.GetDB(), num)
-	database.CheckError(err)
+	if err != nil {
+		http.Error(w, http.StatusText(500), 500)
+		return
+	}
 	json.NewEncoder(w).Encode(post)
 }
 
@@ -33,39 +41,65 @@ func GetPost(w http.ResponseWriter, r *http.Request) {
 func CreatePost(w http.ResponseWriter, r *http.Request) {
 	var post models.Post
 	err := json.NewDecoder(r.Body).Decode(&post)
+	if err != nil {
+		http.Error(w, http.StatusText(500), 500)
+		return
+	}
+
 	err = dataaccess.CreatePost(database.GetDB(), post)
-	database.CheckError(err)
+	if err != nil {
+		http.Error(w, http.StatusText(500), 500)
+		return
+	}
 }
 
 func DeletePost(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 	num, err := strconv.Atoi(id)
 	if err != nil {
-		w.WriteHeader(404)
+		http.Error(w, http.StatusText(404), 404)
 		return
 	}
+
 	err = dataaccess.DeletePost(database.GetDB(), num)
-	database.CheckError(err)
+	if err != nil {
+		http.Error(w, http.StatusText(500), 500)
+		return
+	}
 }
 
 func EditPost(w http.ResponseWriter, r *http.Request) {
 	var post models.Post
 	err := json.NewDecoder(r.Body).Decode(&post)
+	if err != nil {
+		http.Error(w, http.StatusText(500), 500)
+		return
+	}
+
 	err = dataaccess.EditPost(database.GetDB(), post)
-	database.CheckError(err)
+	if err != nil {
+		http.Error(w, http.StatusText(500), 500)
+		return
+	}
 }
 
 func SearchByCategory(w http.ResponseWriter, r *http.Request) {
 	category := chi.URLParam(r, "category")
 	posts, err := dataaccess.SearchByCategory(database.GetDB(), category)
-	database.CheckError(err)
+	if err != nil {
+		http.Error(w, http.StatusText(500), 500)
+		return
+	}
 	json.NewEncoder(w).Encode(posts)
 }
 
 func SearchByQuery(w http.ResponseWriter, r *http.Request) {
 	query := chi.URLParam(r, "query")
 	posts, err := dataaccess.SearchByQuery(database.GetDB(), query)
-	database.CheckError(err)
+	if err != nil {
+		http.Error(w, http.StatusText(500), 500)
+		return
+	}
 	json.NewEncoder(w).Encode(posts)
 }
 
@@ -73,6 +107,9 @@ func SearchByCategoryAndQuery(w http.ResponseWriter, r *http.Request) {
 	category := chi.URLParam(r, "category")
 	query := chi.URLParam(r, "query")
 	posts, err := dataaccess.SearchByCategoryAndQuery(database.GetDB(), category, query)
-	database.CheckError(err)
+	if err != nil {
+		http.Error(w, http.StatusText(500), 500)
+		return
+	}
 	json.NewEncoder(w).Encode(posts)
 }

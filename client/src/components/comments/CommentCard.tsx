@@ -9,9 +9,10 @@ type Props = {
     comment: Comment;
     username: string;
     setCommentToEdit: React.Dispatch<React.SetStateAction<Comment | undefined>>;
+    setStatusCode: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const CommentCard: React.FC<Props> = ({ comment, username, setCommentToEdit }) => {
+const CommentCard: React.FC<Props> = ({ comment, username, setCommentToEdit, setStatusCode }) => {
     const [deleted, setDeleted] = useState(false);
     
     const handleEdit = () => {
@@ -19,8 +20,16 @@ const CommentCard: React.FC<Props> = ({ comment, username, setCommentToEdit }) =
     }
 
     const handleDelete = () => {
-        axios.delete(`http://localhost:8000/forum/comment/${comment.id}`);
-        setDeleted(true);
+        try {
+            axios.delete(`http://localhost:8000/forum/comment/${comment.id}`);
+            setDeleted(true);
+        } catch (err) {
+            if (axios.isAxiosError(err) && err.response) {
+                setStatusCode(err.response.status);
+            } else {
+                setStatusCode(400);
+            }
+        }
     }
 
     if (deleted) {
