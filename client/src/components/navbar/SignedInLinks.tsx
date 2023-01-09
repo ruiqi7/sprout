@@ -13,7 +13,7 @@ const SignedInLinks: React.FC<Props> = ({ back, setStatusCode }) => {
     const handleSignOut = () => {
         axios.post("http://localhost:8000/signout")
             .then(() => navigate("/"))
-            .catch(err => setStatusCode(err.response.statusCode))
+            .catch(err => setStatusCode(err.response.status))
     }
 
     return (

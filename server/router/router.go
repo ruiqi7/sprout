@@ -14,7 +14,6 @@ func SetUp() http.Handler {
 	r.Use(middleware.Logger)
 
 	r.Group(func(r chi.Router) {
-		r.Get("/user", handlers.GetUser)
 		r.Post("/signin", handlers.SignIn)
 	})
 

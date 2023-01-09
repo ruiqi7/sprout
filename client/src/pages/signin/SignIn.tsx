@@ -33,7 +33,7 @@ const SignIn: React.FC = () => {
 
     return (
         <div className="signin">
-            <NavBar back={true} setStatusCode={setStatusCode} />
+            <NavBar isSignedIn={false} back={true} />
             <Welcoming className="signin_welcoming"/>
             <form>
                 <span className="signin_welcome">Welcome!</span>

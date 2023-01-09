@@ -26,7 +26,7 @@ const CreatePost: React.FC<Props> = ({ setCreateRequested, setStatusCode }) => {
                 }
             }
         })();
-    }, []);
+    }, [setStatusCode]);
 
     const handlePost = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();

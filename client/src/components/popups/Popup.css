@@ -43,7 +43,7 @@
     color: darkgrey;
 }
 
-.popup_close svg:hover, svg:focus, svg:active {
+.popup_close svg:hover, svg:active {
     color: #828282;
 }
 

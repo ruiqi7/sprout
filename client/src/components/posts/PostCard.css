@@ -15,7 +15,7 @@
     background-color: #fdf5f1;
 }
 
-.postcard:hover, .postcard:focus, .postcard:active {
+.postcard:hover, .postcard:active {
     background-color: lightgrey;
 }
 

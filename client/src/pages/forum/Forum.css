@@ -41,7 +41,7 @@
     color: lightgrey;
 }
 
-.forum_search svg:hover, .forum_search svg:focus, .forum_search svg:active {
+.forum_search svg:hover, .forum_search svg:active {
     color: darkgrey;
 }
 
@@ -102,14 +102,17 @@
 .forum_create {
     position: absolute;
     top: 26px;
-    left: 1060px;
-    width: 90px;
+    left: 1065px;
+    width: 87px;
+    padding: 0;
     cursor: pointer;
     color: black;
     font-family: Verdana, sans-serif;
     font-size: 15px;
+    background-color: transparent;
+    border: none;
 }
 
-.forum_create:hover, .forum_create:focus, .forum_create:active {
+.forum_create:hover, .forum_create:active {
     color: darkgrey;
 }

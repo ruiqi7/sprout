@@ -26,7 +26,7 @@ const CreateComment: React.FC<Props> = ({ setCommentRequested, setStatusCode }) 
                 }
             }
         })();
-    }, []);
+    }, [setStatusCode]);
 
     const handleComment = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();

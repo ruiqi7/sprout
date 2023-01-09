@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../../components/navbar/NavBar';
 import PostList from '../../components/posts/PostList';
 import SearchIcon from '../../assets/SearchIcon';
 import CreatePost from '../posts/CreatePost';
 import Error from '../error/Error';
 import './Forum.css';
+import Loading from '../loading/Loading';
 
 const Forum: React.FC = () => {
     const categories = ["All", "Education", "Environment", "Health", "Humanities", "Politics", "Science", "Sports", "Technology"];
@@ -13,6 +14,14 @@ const Forum: React.FC = () => {
     const [searchRequested, setSearchRequested] = useState(false);
     const [createRequested, setCreateRequested] = useState(false);
     const [statusCode, setStatusCode] = useState(200);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000);
+    }, []);
 
     const handleCategoryChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, item: string) => {
         e.preventDefault();
@@ -30,14 +39,18 @@ const Forum: React.FC = () => {
         setSearchRequested(true);
     }
 
+    if (loading) {
+        return <Loading />
+    }
+
     if (statusCode >= 400) {
         return <Error code={statusCode} />
     }
 
     return (
         <div className="forum">
-            <NavBar back={false} setStatusCode={setStatusCode} />
-            <a className="forum_create" onClick={() => setCreateRequested(true)}>Create Post</a>
+            <NavBar isSignedIn={true} back={false} setStatusCode={setStatusCode} />
+            <button className="forum_create" onClick={() => setCreateRequested(true)}>Create Post</button>
             <form>
                 <div className="forum_category">
                     <span className="forum_filter">Filter by category</span>

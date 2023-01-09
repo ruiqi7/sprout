@@ -74,6 +74,7 @@ func SetCookie(w http.ResponseWriter, tokenStr string, maxAge int) {
 func GetClaims(w http.ResponseWriter, r *http.Request) *models.Claims {
 	cookie, err := r.Cookie("token")
 	if err != nil {
+		http.Error(w, "Missing Token", 401)
 		return nil
 	}
 

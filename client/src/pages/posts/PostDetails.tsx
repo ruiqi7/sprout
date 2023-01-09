@@ -12,6 +12,7 @@ import Post from '../../types/Post';
 import CreateComment from '../comments/CreateComment';
 import EditComment from '../comments/EditComment';
 import Error from '../error/Error';
+import Loading from '../loading/Loading';
 import EditPost from './EditPost';
 import './PostDetails.css';
 
@@ -25,8 +26,13 @@ const PostDetails: React.FC = () => {
     const [commentRequested, setCommentRequested] = useState(false);
     const [commentToEdit, setCommentToEdit] = useState<Comment>();
     const [statusCode, setStatusCode] = useState(200);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000);
         (async () => {
             try {
                 let res = await axios.get(server);
@@ -42,7 +48,7 @@ const PostDetails: React.FC = () => {
                 }
             }
         })();
-    }, []);
+    }, [server]);
 
     const handleEdit = () => {
         setEditRequested(true);
@@ -60,19 +66,19 @@ const PostDetails: React.FC = () => {
     if (deleted) {
         return (
             <div>
-                <NavBar back={true} setStatusCode={setStatusCode} />
+                <NavBar isSignedIn={true} back={true} setStatusCode={setStatusCode} />
                 <p className="post-details_deleted">[ Post deleted! ]</p>
             </div>
         );
     }
 
-    if (!post) {
-        return <NavBar back={true} setStatusCode={setStatusCode} />
+    if (loading || !post) {
+        return <Loading />
     }
 
     return (
         <div className="post-details">
-            <NavBar back={true} setStatusCode={setStatusCode} />
+            <NavBar isSignedIn={true} back={true} setStatusCode={setStatusCode} />
             <div className="post-details_contents">
                 <div className="post-details_post">
                     <div>
