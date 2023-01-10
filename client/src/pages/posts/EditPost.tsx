@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import PostPopup from '../../components/popups/PostPopup';
+import { errorHandler } from '../../handler/ErrorHandler';
 import Post from '../../types/Post';
 
 type Props = {
@@ -26,7 +27,7 @@ const EditPost: React.FC<Props> = ({ post, setEditRequested, setStatusCode }) =>
         }
         axios.put(`http://localhost:8000/forum/post/${id}`, updatedPost)
             .then(() => window.location.reload())
-            .catch(err => setStatusCode(err.response.status));
+            .catch(err => setStatusCode(errorHandler(err)));
     }
 
     return (

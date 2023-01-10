@@ -11,34 +11,39 @@ import (
 
 var key = []byte("key")
 
-// Solution adapted from https://blog.logrocket.com/jwt-authentication-go/#:~:text=Generating%20JWTs%20for%20authentication%20using,from%20an%20environment%20variables%20file%20(
-func GenerateToken(id int, username string) (string, error) {
+// Solution adapted from
+// https://blog.logrocket.com/jwt-authentication-go/#:~:text=Generating%20JWTs%20for%20authentication%20using,from%20an%20environment%20variables%20file%20(
+// https://www.sohamkamani.com/golang/jwt-authentication/
+func GenerateToken(id int, username string) (string, time.Time, error) {
+	expiry := time.Now().Add(10 * time.Minute)
 	claims := &models.Claims{
 		ID:       id,
 		Username: username,
 		RegisteredClaims: jwt.RegisteredClaims{
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(10 * time.Minute)),
+			ExpiresAt: jwt.NewNumericDate(expiry),
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	tokenStr, err := token.SignedString(key)
 	if err != nil {
-		return "", err
+		return "", expiry, err
 	}
-	return tokenStr, nil
+	return tokenStr, expiry, nil
 }
 
-func verifyToken(tokenStr string) (*jwt.Token, error) {
-	return jwt.Parse(tokenStr, func(token *jwt.Token) (interface{}, error) {
+func verifyToken(tokenStr string) (*jwt.Token, *models.Claims, error) {
+	claims := &models.Claims{}
+	token, err := jwt.ParseWithClaims(tokenStr, claims, func(token *jwt.Token) (interface{}, error) {
 		_, ok := token.Method.(*jwt.SigningMethodHMAC)
 		if !ok {
 			return nil, fmt.Errorf("Unauthorized")
 		}
-		return []byte(key), nil
+		return key, nil
 	})
+	return token, claims, err
 }
 
-func VerifyAuth(endpointHandler func(w http.ResponseWriter, r *http.Request)) http.HandlerFunc {
+func VerifyAuth(endpoint func(w http.ResponseWriter, r *http.Request)) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		cookie, err := r.Cookie("token")
 		if err != nil {
@@ -47,7 +52,7 @@ func VerifyAuth(endpointHandler func(w http.ResponseWriter, r *http.Request)) ht
 		}
 
 		tokenStr := cookie.Value
-		token, err := verifyToken(tokenStr)
+		token, claims, err := verifyToken(tokenStr)
 
 		if err != nil {
 			http.Error(w, "Error Parsing Token", 401)
@@ -59,15 +64,25 @@ func VerifyAuth(endpointHandler func(w http.ResponseWriter, r *http.Request)) ht
 			return
 		}
 
-		endpointHandler(w, r)
+		if time.Until(claims.ExpiresAt.Time) < 30*time.Second {
+			tokenStr, expiry, err := GenerateToken(claims.ID, claims.Username)
+			if err != nil {
+				http.Error(w, "Token Not Renewed", 500)
+				return
+			}
+			SetCookie(w, tokenStr, expiry)
+		}
+
+		endpoint(w, r)
 	})
 }
 
-func SetCookie(w http.ResponseWriter, tokenStr string, maxAge int) {
+func SetCookie(w http.ResponseWriter, tokenStr string, expiry time.Time) {
 	http.SetCookie(w, &http.Cookie{
-		Name:   "token",
-		Value:  tokenStr,
-		MaxAge: maxAge,
+		Name:    "token",
+		Value:   tokenStr,
+		Expires: expiry,
+		Path:    "/",
 	})
 }
 
@@ -79,13 +94,11 @@ func GetClaims(w http.ResponseWriter, r *http.Request) *models.Claims {
 	}
 
 	tokenStr := cookie.Value
-	token, err := jwt.ParseWithClaims(tokenStr, &models.Claims{}, func(token *jwt.Token) (interface{}, error) {
-		return []byte(key), nil
-	})
+	_, claims, err := verifyToken(tokenStr)
 	if err != nil {
 		http.Error(w, "Invalid Token", 401)
 		return nil
 	}
 
-	return token.Claims.(*models.Claims)
+	return claims
 }

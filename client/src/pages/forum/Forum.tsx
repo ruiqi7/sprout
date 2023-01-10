@@ -1,11 +1,13 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import NavBar from '../../components/navbar/NavBar';
 import PostList from '../../components/posts/PostList';
 import SearchIcon from '../../assets/SearchIcon';
 import CreatePost from '../posts/CreatePost';
 import Error from '../error/Error';
-import './Forum.css';
 import Loading from '../loading/Loading';
+import { errorHandler } from '../../handler/ErrorHandler';
+import './Forum.css';
 
 const Forum: React.FC = () => {
     const categories = ["All", "Education", "Environment", "Health", "Humanities", "Politics", "Science", "Sports", "Technology"];
@@ -13,7 +15,8 @@ const Forum: React.FC = () => {
     const [query, setQuery] = useState("");
     const [searchRequested, setSearchRequested] = useState(false);
     const [createRequested, setCreateRequested] = useState(false);
-    const [statusCode, setStatusCode] = useState(200);
+    const [statusCode, setStatusCode] = useState(0);
+    const [username, setUsername] = useState("");
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -21,6 +24,15 @@ const Forum: React.FC = () => {
         setTimeout(() => {
             setLoading(false);
         }, 1000);
+        (async () => {
+            try {
+                const res = await axios.get("http://localhost:8000/forum/user");
+                setUsername(res.data);
+                setStatusCode(200);
+            } catch (err) {
+                setStatusCode(errorHandler(err));
+            }
+        })();
     }, []);
 
     const handleCategoryChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, item: string) => {
@@ -39,7 +51,7 @@ const Forum: React.FC = () => {
         setSearchRequested(true);
     }
 
-    if (loading) {
+    if (loading || statusCode === 0) {
         return <Loading />
     }
 
@@ -74,7 +86,7 @@ const Forum: React.FC = () => {
                 <span className="forum_comments-header">Comments</span>
             </div>
             <PostList searchRequested={searchRequested} category={category} query={query} setStatusCode={setStatusCode} />
-            { createRequested ? <CreatePost setCreateRequested={setCreateRequested} setStatusCode={setStatusCode} /> : <></> }
+            { createRequested ? <CreatePost username={username} setCreateRequested={setCreateRequested} setStatusCode={setStatusCode} /> : <></> }
         </div>
     );
 }

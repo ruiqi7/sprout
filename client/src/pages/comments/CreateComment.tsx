@@ -1,32 +1,18 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CommentPopup from '../../components/popups/CommentPopup';
+import { errorHandler } from '../../handler/ErrorHandler';
 
 type Props = {
+    username: string;
     setCommentRequested: React.Dispatch<React.SetStateAction<boolean>>;
     setStatusCode: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const CreateComment: React.FC<Props> = ({ setCommentRequested, setStatusCode }) => {
+const CreateComment: React.FC<Props> = ({ username, setCommentRequested, setStatusCode }) => {
     const { id } = useParams();
-    const [username, setUsername] = useState("");
     const [content, setContent] = useState("");
-
-    useEffect(() => {
-        (async () => {
-            try {
-                const res = await axios.get("http://localhost:8000/forum/user");
-                setUsername(res.data);
-            } catch (err) {
-                if (axios.isAxiosError(err) && err.response) {
-                    setStatusCode(err.response.status);
-                } else {
-                    setStatusCode(400);
-                }
-            }
-        })();
-    }, [setStatusCode]);
 
     const handleComment = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
@@ -36,7 +22,7 @@ const CreateComment: React.FC<Props> = ({ setCommentRequested, setStatusCode }) 
         }
         axios.post(`http://localhost:8000/forum/post/${id}/comment`, comment)
             .then(() => window.location.reload())
-            .catch(err => setStatusCode(err.response.status));
+            .catch(err => setStatusCode(errorHandler(err)));
     }
 
     return (

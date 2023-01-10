@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { errorHandler } from '../../handler/ErrorHandler';
 
 type Props = {
     back: boolean;
@@ -13,7 +14,7 @@ const SignedInLinks: React.FC<Props> = ({ back, setStatusCode }) => {
     const handleSignOut = () => {
         axios.post("http://localhost:8000/signout")
             .then(() => navigate("/"))
-            .catch(err => setStatusCode(err.response.status))
+            .catch(err => setStatusCode(errorHandler(err)))
     }
 
     return (

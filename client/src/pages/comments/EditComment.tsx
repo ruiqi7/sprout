@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import CommentPopup from '../../components/popups/CommentPopup';
+import { errorHandler } from '../../handler/ErrorHandler';
 import Comment from '../../types/Comment';
 
 type Props = {
@@ -22,7 +23,7 @@ const EditComment: React.FC<Props> = ({ comment, setCommentToEdit, setStatusCode
         }
         axios.put(`http://localhost:8000/forum/comment/${id}`, updatedComment)
             .then(() => window.location.reload())
-            .catch(err => setStatusCode(err.response.status));
+            .catch(err => setStatusCode(errorHandler(err)));
     }
 
     return (

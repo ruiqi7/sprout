@@ -1,32 +1,17 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PostPopup from '../../components/popups/PostPopup';
 
 type Props = {
+    username: string;
     setCreateRequested: React.Dispatch<React.SetStateAction<boolean>>;
     setStatusCode: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const CreatePost: React.FC<Props> = ({ setCreateRequested, setStatusCode }) => {
-    const [username, setUsername] = useState("");
+const CreatePost: React.FC<Props> = ({ username, setCreateRequested, setStatusCode }) => {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
     const [category, setCategory] = useState("");
-
-    useEffect(() => {
-        (async () => {
-            try {
-                const res = await axios.get("http://localhost:8000/forum/user");
-                setUsername(res.data);
-            } catch (err) {
-                if (axios.isAxiosError(err) && err.response) {
-                    setStatusCode(err.response.status);
-                } else {
-                    setStatusCode(400);
-                }
-            }
-        })();
-    }, [setStatusCode]);
 
     const handlePost = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();

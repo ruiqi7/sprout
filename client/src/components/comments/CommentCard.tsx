@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import DeleteIcon from '../../assets/DeleteIcon';
 import EditIcon from '../../assets/EditIcon';
+import { errorHandler } from '../../handler/ErrorHandler';
 import Comment from '../../types/Comment';
 import './CommentCard.css';
 
@@ -24,11 +25,7 @@ const CommentCard: React.FC<Props> = ({ comment, username, setCommentToEdit, set
             axios.delete(`http://localhost:8000/forum/comment/${comment.id}`);
             setDeleted(true);
         } catch (err) {
-            if (axios.isAxiosError(err) && err.response) {
-                setStatusCode(err.response.status);
-            } else {
-                setStatusCode(400);
-            }
+            setStatusCode(errorHandler(err));
         }
     }
 

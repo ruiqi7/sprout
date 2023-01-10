@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import { errorHandler } from '../../handler/ErrorHandler';
 import Comment from '../../types/Comment';
 import CommentCard from './CommentCard';
 import './CommentList.css';
@@ -12,7 +13,7 @@ class CommentList extends React.Component<{ id: string, username: string, setCom
     componentDidMount() {
         axios.get(`http://localhost:8000/forum/post/${this.props.id}/comments`)
             .then(res => this.setState(res.data))
-            .catch(err => this.props.setStatusCode(err.response.status));
+            .catch(err => this.props.setStatusCode(errorHandler(err)));
     }
 
     render() {

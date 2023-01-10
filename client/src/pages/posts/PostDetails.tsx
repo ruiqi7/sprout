@@ -7,6 +7,7 @@ import EditIcon from '../../assets/EditIcon';
 import MessagesIcon from '../../assets/MessagesIcon';
 import CommentList from '../../components/comments/CommentList';
 import NavBar from '../../components/navbar/NavBar';
+import { errorHandler } from '../../handler/ErrorHandler';
 import Comment from '../../types/Comment';
 import Post from '../../types/Post';
 import CreateComment from '../comments/CreateComment';
@@ -25,7 +26,7 @@ const PostDetails: React.FC = () => {
     const [editRequested, setEditRequested] = useState(false);
     const [commentRequested, setCommentRequested] = useState(false);
     const [commentToEdit, setCommentToEdit] = useState<Comment>();
-    const [statusCode, setStatusCode] = useState(200);
+    const [statusCode, setStatusCode] = useState(0);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -40,12 +41,10 @@ const PostDetails: React.FC = () => {
 
                 res = await axios.get("http://localhost:8000/forum/user");
                 setUsername(res.data);
+
+                setStatusCode(200);
             } catch (err) {
-                if (axios.isAxiosError(err) && err.response) {
-                    setStatusCode(err.response.status);
-                } else {
-                    setStatusCode(400);
-                }
+                setStatusCode(errorHandler(err));
             }
         })();
     }, [server]);
@@ -72,7 +71,7 @@ const PostDetails: React.FC = () => {
         );
     }
 
-    if (loading || !post) {
+    if (loading || !post || statusCode === 0) {
         return <Loading />
     }
 
@@ -101,7 +100,7 @@ const PostDetails: React.FC = () => {
                 { id && <CommentList id={id} username={username} setCommentToEdit={setCommentToEdit} setStatusCode={setStatusCode} /> }
             </div>
             { editRequested ? <EditPost post={post} setEditRequested={setEditRequested} setStatusCode={setStatusCode} /> : <></> }
-            { commentRequested ? <CreateComment setCommentRequested={setCommentRequested} setStatusCode={setStatusCode} /> : <></> }
+            { commentRequested ? <CreateComment username={username} setCommentRequested={setCommentRequested} setStatusCode={setStatusCode} /> : <></> }
             { commentToEdit && <EditComment comment={commentToEdit} setCommentToEdit={setCommentToEdit} setStatusCode={setStatusCode} /> }
         </div>
      );

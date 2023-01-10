@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Welcoming from '../../assets/Welcoming';
 import NavBar from '../../components/navbar/NavBar';
+import { errorHandler } from '../../handler/ErrorHandler';
 import Error from '../error/Error';
 import './SignIn.css';
 
@@ -24,7 +25,7 @@ const SignIn: React.FC = () => {
         }
         axios.post("http://localhost:8000/signin", user)
             .then(() => navigate("/forum/posts"))
-            .catch(err => setStatusCode(err.response.status));
+            .catch(err => setStatusCode(errorHandler(err)));
     }
 
     if (statusCode >= 400) {

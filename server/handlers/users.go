@@ -3,6 +3,7 @@ package handlers
 import (
 	"encoding/json"
 	"net/http"
+	"time"
 
 	"github.com/ruiqi7/web-forum/server/auth"
 	"github.com/ruiqi7/web-forum/server/dataaccess"
@@ -25,17 +26,17 @@ func SignIn(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tokenStr, err := auth.GenerateToken(id, user.Username)
+	tokenStr, expiry, err := auth.GenerateToken(id, user.Username)
 	if err != nil {
 		http.Error(w, http.StatusText(500), 500)
 		return
 	}
 
-	auth.SetCookie(w, tokenStr, 600)
+	auth.SetCookie(w, tokenStr, expiry)
 }
 
 func SignOut(w http.ResponseWriter, r *http.Request) {
-	auth.SetCookie(w, "", -1)
+	auth.SetCookie(w, "", time.Now().Add(-1*time.Minute))
 }
 
 // Solution adapted from https://stackoverflow.com/questions/72682230/golang-jwt-mapclaims-get-user-id

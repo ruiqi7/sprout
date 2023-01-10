@@ -22,12 +22,15 @@ const Error: React.FC<Props> = ({ code }) => {
             } else if (code === 500) {
                 setMessage1("The server has encountered an internal error.");
                 setMessage2("Feel free to report the issue if the problem persists.");
+            } else if (code === 503) {
+                setMessage1("Oops, the service is unavailable!");
+                setMessage2("The server is currently unable to handle your request.");
             } else {
                 setMessage1("Something went wrong!");
                 setMessage2("Please try again later.");
             }
         })();
-    }, [])
+    }, [code])
 
     return (
         <div className="error">
