@@ -1,5 +1,6 @@
 import { SVGProps } from 'react';
 
+// Resource: https://tablericons.com/
 const EditIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
