@@ -52,11 +52,11 @@ CREATE DATABASE sprout;
 ```bash
 \c sprout
 ```
-7. To set up the tables in the database, copy and paste the contents of [this file]() into the terminal.
+7. To set up the tables in the database, copy and paste the contents of [this file](https://github.com/ruiqi7/sprout/blob/main/server/database/tables.sql) into the terminal.
 
 ### Setting up the server
 
-8. Navigate to the [server folder]().
+8. Navigate to the [server folder](https://github.com/ruiqi7/sprout/tree/main/server).
 9. Connect to the server.
 ```bash
 go run .
@@ -64,7 +64,7 @@ go run .
 
 ### Setting up the client
 
-10. Open another terminal and navigate to the [client folder]().
+10. Open another terminal and navigate to the [client folder](https://github.com/ruiqi7/sprout/tree/main/client).
 11. Install the dependencies.
 ```bash
 npm install
@@ -76,4 +76,4 @@ npm start
 
 ## License
 
-Distributed under the MIT License. See [LICENSE]() for more information.
+Distributed under the MIT License. See [LICENSE](https://github.com/ruiqi7/sprout/blob/main/LICENSE) for more information.
