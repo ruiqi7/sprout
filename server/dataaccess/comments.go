@@ -4,7 +4,7 @@ import (
 	"database/sql"
 
 	"github.com/lib/pq"
-	"github.com/ruiqi7/web-forum/server/models"
+	"github.com/ruiqi7/sprout/server/models"
 )
 
 func GetAllComments(db *sql.DB, id int) (*models.CommentList, error) {

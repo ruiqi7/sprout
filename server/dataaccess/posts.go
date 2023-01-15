@@ -4,7 +4,7 @@ import (
 	"database/sql"
 
 	"github.com/lib/pq"
-	"github.com/ruiqi7/web-forum/server/models"
+	"github.com/ruiqi7/sprout/server/models"
 )
 
 // Solution adapted from https://blog.logrocket.com/how-to-build-a-restful-api-with-docker-postgresql-and-go-chi/

@@ -1,4 +1,4 @@
-module github.com/ruiqi7/web-forum
+module github.com/ruiqi7/sprout
 
 go 1.19
 

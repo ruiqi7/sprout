@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v4"
-	"github.com/ruiqi7/web-forum/server/models"
+	"github.com/ruiqi7/sprout/server/models"
 )
 
 var key = []byte("key")

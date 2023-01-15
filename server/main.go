@@ -4,9 +4,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/ruiqi7/web-forum/server/config"
-	"github.com/ruiqi7/web-forum/server/database"
-	"github.com/ruiqi7/web-forum/server/router"
+	"github.com/ruiqi7/sprout/server/config"
+	"github.com/ruiqi7/sprout/server/database"
+	"github.com/ruiqi7/sprout/server/router"
 )
 
 func main() {

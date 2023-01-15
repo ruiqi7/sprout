@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/ruiqi7/web-forum/server/auth"
-	"github.com/ruiqi7/web-forum/server/dataaccess"
-	"github.com/ruiqi7/web-forum/server/database"
-	"github.com/ruiqi7/web-forum/server/models"
+	"github.com/ruiqi7/sprout/server/auth"
+	"github.com/ruiqi7/sprout/server/dataaccess"
+	"github.com/ruiqi7/sprout/server/database"
+	"github.com/ruiqi7/sprout/server/models"
 )
 
 // Solution adapted from https://www.sohamkamani.com/golang/jwt-authentication/

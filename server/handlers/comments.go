@@ -6,9 +6,9 @@ import (
 	"strconv"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/ruiqi7/web-forum/server/dataaccess"
-	"github.com/ruiqi7/web-forum/server/database"
-	"github.com/ruiqi7/web-forum/server/models"
+	"github.com/ruiqi7/sprout/server/dataaccess"
+	"github.com/ruiqi7/sprout/server/database"
+	"github.com/ruiqi7/sprout/server/models"
 )
 
 func GetAllComments(w http.ResponseWriter, r *http.Request) {

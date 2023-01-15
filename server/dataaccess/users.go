@@ -3,7 +3,7 @@ package dataaccess
 import (
 	"database/sql"
 
-	"github.com/ruiqi7/web-forum/server/models"
+	"github.com/ruiqi7/sprout/server/models"
 )
 
 func GetUserID(db *sql.DB, user models.User) (int, error) {

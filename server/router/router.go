@@ -5,8 +5,8 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
-	"github.com/ruiqi7/web-forum/server/auth"
-	"github.com/ruiqi7/web-forum/server/handlers"
+	"github.com/ruiqi7/sprout/server/auth"
+	"github.com/ruiqi7/sprout/server/handlers"
 )
 
 func SetUp() http.Handler {

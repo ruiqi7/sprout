@@ -13,7 +13,7 @@ const (
 	port     = 5432
 	user     = "postgres"
 	password = "password"
-	dbname   = "forum"
+	dbname   = "sprout"
 )
 
 var db *sql.DB
