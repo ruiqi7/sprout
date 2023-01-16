@@ -48,7 +48,7 @@
 }
 
 .popup_category select {
-    font-family: 'Open Sans', sans-serif;
+    font-family: open_sans;
     font-size: 14px;
     margin: 18px 0;
     padding: 5px;
@@ -72,7 +72,7 @@
 }
 
 .popup_title input {
-    font-family: 'Open Sans', sans-serif;
+    font-family: open_sans;
     font-size: 18px;
     padding: 0 10px;
     margin-right: 23px;
@@ -87,9 +87,9 @@
 }
 
 .popup_body textarea {
-    font-family: 'Open Sans', sans-serif;
+    font-family: open_sans;
     font-size: 16px;
-    padding: 10px;
+    padding: 5px 10px;
     margin: 15px 0 10px 0;
     width: 660px;
     border: none;

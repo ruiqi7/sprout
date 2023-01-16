@@ -11,7 +11,7 @@
     justify-content: space-between;
     width: 750px;
     height: 25px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: open_sans;
     font-size: 18px;
     font-weight: bold;
     color: #808080;
@@ -41,6 +41,6 @@
     width: 800px;
     text-align: center;
     font-size: 18px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: open_sans;
     line-height: 30px;
 }

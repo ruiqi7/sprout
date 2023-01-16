@@ -14,7 +14,7 @@
 
 .post-details_post {
     width: 700px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: open_sans;
     text-align: left;
     border: 2px solid #f0dbcc;
     padding: 10px 20px 0 20px;
@@ -86,7 +86,7 @@
     position: relative;
     top: 0;
     transition: top ease 0.1s;
-    font-family: 'Open Sans', sans-serif;
+    font-family: open_sans;
     font-size: 13px;
 }
 

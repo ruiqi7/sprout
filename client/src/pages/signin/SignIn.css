@@ -37,8 +37,8 @@
 }
 
 .signin_welcome {
-    font-family: 'Merriweather';
-    font-size: min(calc(35px + 1vh + 1vw), 60px);
+    font-family: 'Georgia', serif;
+    font-size: min(calc(25px + 1vh + 1vw), 50px);
     font-weight: bold;
     margin-bottom: 50px;
 }

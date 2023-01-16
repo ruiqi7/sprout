@@ -8,3 +8,8 @@
   bottom: 0;
   left: 0;
 }
+
+@font-face {
+  font-family: open_sans;
+  src: url('assets/OpenSans-Regular.ttf');
+}
