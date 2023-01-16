@@ -2,6 +2,10 @@
 
 A web forum that allows users to initiate and contribute to discussions.
 
+![Home](ui/Home.png)
+![Forum](ui/Forum.png)
+![Post](ui/Post.png)
+
 ## Features
 
 * Authenticates users by username
