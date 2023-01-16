@@ -1,9 +1,46 @@
 .postlist {
     position: absolute;
-    top: 154px;
+    top: 95px;
     bottom: 20px;
-    overflow: auto;
-    overflow-x: hidden;
     right: 110px;
     width: 800px;
+}
+
+.postlist_headers {
+    display: flex;
+    justify-content: space-between;
+    width: 750px;
+    height: 25px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #808080;
+    padding: 17px 15px;
+    background-color: #f0dbcc;
+}
+
+.postlist_category-header {
+    margin-left: 400px;
+}
+
+.postlist_posts {
+    position: absolute;
+    bottom: 0px;
+    top: 59px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.postlist_no-posts {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 95px;
+    right: 110px;
+    width: 800px;
+    text-align: center;
+    font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 30px;
 }

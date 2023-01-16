@@ -34,9 +34,20 @@ class PostList extends React.Component<{ searchRequested: boolean, category: str
     }
 
     render() {
+        if (!this.state.posts) {
+            return <span className="postlist_no-posts">There are no posts at the moment . . .<br/>Click on 'Create Post' on the top right to get the ball rolling!</span>
+        }
+
         return (
             <div className="postlist">
-                {this.state.posts && this.state.posts.map(post => <PostCard post={post} key={post.id} />)}
+                <div className="postlist_headers">
+                    <span className="postlist_posts-header">Posts</span>
+                    <span className="postlist_category-header">Category</span>
+                    <span className="postlist_comments-header">Comments</span>
+                </div>
+                <div className="postlist_posts">
+                    {this.state.posts.map(post => <PostCard post={post} key={post.id} />)}
+                </div>
             </div>
         );
     }

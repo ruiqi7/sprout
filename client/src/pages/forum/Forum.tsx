@@ -80,11 +80,6 @@ const Forum: React.FC = () => {
                     <SearchIcon />
                 </button>
             </form>
-            <div className="forum_headers">
-                <span className="forum_posts-header">Posts</span>
-                <span className="forum_category-header">Category</span>
-                <span className="forum_comments-header">Comments</span>
-            </div>
             <PostList searchRequested={searchRequested} category={category} query={query} setStatusCode={setStatusCode} />
             { createRequested ? <CreatePost username={username} setCreateRequested={setCreateRequested} setStatusCode={setStatusCode} /> : <></> }
         </div>

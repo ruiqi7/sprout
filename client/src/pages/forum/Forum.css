@@ -84,26 +84,6 @@
     color: darkgrey;
 }
 
-.forum_headers {
-    position: absolute;
-    display: flex;
-    justify-content: space-between;
-    right: 130px;
-    width: 750px;
-    height: 25px;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 18px;
-    font-weight: bold;
-    color: #808080;
-    top: 95px;
-    padding: 17px 15px;
-    background-color: #f0dbcc;
-}
-
-.forum_category-header {
-    margin-left: 400px;
-}
-
 .forum_create {
     position: absolute;
     top: 28px;
