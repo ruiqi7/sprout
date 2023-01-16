@@ -53,6 +53,7 @@ const PostPopup: React.FC<Props> = ({ header, category, setCategory, title, setT
                 </div>
                 <div className="popup_body">
                     <textarea
+                        className="popup_post"
                         value={body} 
                         onChange={e => setBody(e.target.value)}
                         placeholder="What's on your mind?"

@@ -1,9 +1,9 @@
 .postlist {
     position: absolute;
-    top: 148px;
+    top: 154px;
     bottom: 20px;
-    height: 440px;
     overflow: auto;
     overflow-x: hidden;
-    margin-left: 384px;
+    right: 110px;
+    width: 800px;
 }

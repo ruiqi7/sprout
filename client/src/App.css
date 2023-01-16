@@ -1,5 +1,10 @@
 .App {
   text-align: center;
   min-width: 1280px;
-  max-width: 1920px;
+  min-height: 609px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }

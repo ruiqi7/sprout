@@ -34,6 +34,7 @@ const CommentPopup: React.FC<Props> = ({ header, content, setContent, handleClos
                 </div>
                 <div className="popup_body">
                     <textarea 
+                        className="popup_comment"
                         value={content} 
                         onChange={e => setContent(e.target.value)}
                         placeholder="Share your thoughts!"

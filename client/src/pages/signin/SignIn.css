@@ -1,40 +1,61 @@
-.signin_welcoming {
-    float: left;
-    margin: 50px 0px 10px 150px;
+.signin {
+    width: 100%;
+    height: 100%;
 }
 
-.signin form {
+.signin_contents {
+    height: calc(100% - 75px);
     display: flex;
-    width: 30%;
+    flex-direction: row;
+}
+
+.signin_left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.signin_welcoming {
+    padding: 20px;
+}
+
+.signin_right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.signin_right form {
+    display: flex;
     flex-direction: column;
-    position: relative;
-    top: 150px;
-    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 30px;
 }
 
 .signin_welcome {
     font-family: 'Merriweather';
-    font-size: 40px;
+    font-size: min(calc(35px + 1vh + 1vw), 60px);
     font-weight: bold;
     margin-bottom: 50px;
-}
-
-.signin_username {
-    height: 60px;
 }
 
 .signin_username input {
     border: none;
     border-bottom: 2px solid lightgrey;
     padding: 5px;
-    margin-bottom: 40px;
     font-family: Verdana, sans-serif;
-    font-size: 20px;
+    font-size: min(calc(5px + 1vh + 1vw), 30px);
+    margin-bottom: 30px;
 }
 
 .signin_username input:focus {
     outline: none;
     border-bottom: 3px solid #cff0cc;
+    margin-bottom: 29px;
 }
 
 .signin_button {
@@ -43,8 +64,8 @@
     background-color: lightgrey;
     padding: 10px 15px;
     font-family: Verdana, sans-serif;
-    font-size: 20px;
-    width: 30%;
+    font-size: min(calc(5px + 0.8vh + 0.8vw), 25px);
+    width: 25%;
     margin: 0 auto;
     transition-duration: 0.5s;
 }
@@ -54,6 +75,7 @@
 }
 
 .signin_error {
+    height: 20px;
     font-family: Verdana, sans-serif;
     font-size: 14px;
     color: #f4312f;

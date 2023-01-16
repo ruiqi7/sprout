@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-between;
     font-family: Verdana, sans-serif;
-    height: 70px;
+    height: 75px;
 }
 
 .navbar_logo {
@@ -32,7 +32,7 @@
 .navbar li a {
     text-decoration: none;
     color: black;
-    font-size: 15px;
+    font-size: 17px;
 }
 
 .navbar li a:hover, .navbar li a:active {

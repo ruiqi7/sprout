@@ -1,7 +1,7 @@
 .comment-list {
-    width: 754px;
+    width: 774px;
     overflow: auto;
     overflow-x: hidden;
-    margin-left: -10px;
+    margin-left: 10px;
     margin-top: 25px;
 }

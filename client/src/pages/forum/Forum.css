@@ -1,13 +1,15 @@
 .forum {
-    min-height: 609px;
+    width: 100%;
+    height: 100%;
 }
 
 .forum_query {
     display: inline-block;
     position: absolute;
-    top: 16px;
-    left: 495px;
+    top: 17px;
+    right: 290px;
     width: 500px;
+    height: 20px;
 }
 
 .forum_query input {
@@ -17,7 +19,7 @@
     border: 2px solid lightgrey;
     padding: 8px 15px;
     font-family: Verdana, sans-serif;
-    font-size: 14px;
+    font-size: 17px;
 }
 
 .forum_query input:focus {
@@ -28,8 +30,8 @@
 .forum_search {
     display: inline-block;
     position: absolute;
-    top: 22px;
-    left: 990px;
+    top: 24px;
+    right: 270px;
     width: 24px;
     height: 24px;
     border: none;
@@ -51,7 +53,8 @@
     flex-direction: column;
     float: left;
     width: 215px;
-    margin: 20px 0 0 100px;
+    left: 130px;
+    top: 95px;
     padding-bottom: 20px;
     border: 2px solid #f0dbcc;
 }
@@ -64,6 +67,7 @@
     text-align: center;
     padding: 17px 0;
     background-color: #f0dbcc;
+    height: 22px;
 }
 
 .forum_button {
@@ -84,13 +88,14 @@
     position: absolute;
     display: flex;
     justify-content: space-between;
-    left: 384px;
+    right: 130px;
     width: 750px;
+    height: 25px;
     font-family: 'Open Sans', sans-serif;
     font-size: 18px;
     font-weight: bold;
     color: #808080;
-    margin-top: 20px;
+    top: 95px;
     padding: 17px 15px;
     background-color: #f0dbcc;
 }
@@ -101,14 +106,14 @@
 
 .forum_create {
     position: absolute;
-    top: 26px;
-    left: 1065px;
-    width: 87px;
+    top: 28px;
+    right: 130px;
+    width: 100px;
     padding: 0;
     cursor: pointer;
     color: black;
     font-family: Verdana, sans-serif;
-    font-size: 15px;
+    font-size: 17px;
     background-color: transparent;
     border: none;
 }

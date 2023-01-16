@@ -7,8 +7,7 @@ const Sprout = (props: SVGProps<SVGSVGElement>) => (
   <svg
   xmlns="http://www.w3.org/2000/svg"
   className="icon icon-tabler icon-tabler-seeding"
-  width={55}
-  height={55}
+  height="80%"
   viewBox="0 0 24 24"
   strokeWidth={0.9}
   stroke="#000"

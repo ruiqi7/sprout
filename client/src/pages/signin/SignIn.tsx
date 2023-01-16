@@ -35,20 +35,26 @@ const SignIn: React.FC = () => {
     return (
         <div className="signin">
             <NavBar isSignedIn={false} back={true} />
-            <Welcoming className="signin_welcoming"/>
-            <form>
-                <span className="signin_welcome">Welcome!</span>
-                <div className="signin_username">
-                    <input
-                        type="text"
-                        value={username} 
-                        onChange={e => setUsername(e.target.value)}
-                        placeholder="Username"
-                    />
+            <div className="signin_contents">
+                <div className="signin_left">
+                    <Welcoming className="signin_welcoming"/>
                 </div>
-                <button className="signin_button" onClick={handleSignIn}>Sign in!</button>
-                <span className="signin_error">{ error }</span>
-            </form>
+                <div className="signin_right">
+                    <form>
+                        <span className="signin_welcome">Welcome!</span>
+                        <div className="signin_username">
+                            <input
+                                type="text"
+                                value={username} 
+                                onChange={e => setUsername(e.target.value)}
+                                placeholder="Username"
+                            />
+                        </div>
+                        <button className="signin_button" onClick={handleSignIn}>Sign in!</button>
+                        <span className="signin_error">{ error }</span>
+                    </form>
+                </div>
+            </div>
         </div>
     );
 }
