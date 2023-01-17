@@ -106,11 +106,11 @@ textarea::-webkit-scrollbar {
 }
 
 .popup_post {
-    height: 200px;
+    height: 210px;
 }
 
 .popup_comment {
-    height: 310px;
+    height: 320px;
 }
 
 .popup_submit {
