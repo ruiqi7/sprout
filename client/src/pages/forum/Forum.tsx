@@ -63,24 +63,26 @@ const Forum: React.FC = () => {
         <div className="forum">
             <NavBar isSignedIn={true} back={false} setStatusCode={setStatusCode} />
             <button className="forum_create" onClick={() => setCreateRequested(true)}>Create Post</button>
-            <form>
-                <div className="forum_category">
-                    <span className="forum_filter">Filter by category</span>
-                    { categories.map(item => <button type="button" className="forum_button" style={{ fontWeight: category === item ? 'bold' : 'normal' }} onClick={e => handleCategoryChange(e, item)} key={item}>{ item }</button>) }
-                </div>
-                <div className="forum_query">
-                    <input
-                        type="text"
-                        value={query} 
-                        onChange={handleQueryChange}
-                        placeholder="Search..."
-                    />
-                </div>
-                <button className="forum_search" onClick={handleSearch} >
-                    <SearchIcon />
-                </button>
-            </form>
-            <PostList searchRequested={searchRequested} category={category} query={query} setStatusCode={setStatusCode} />
+            <div className="forum_contents">
+                <form>
+                    <div className="forum_category">
+                        <span className="forum_filter">Filter by category</span>
+                        { categories.map(item => <button type="button" className="forum_button" style={{ fontWeight: category === item ? 'bold' : 'normal' }} onClick={e => handleCategoryChange(e, item)} key={item}>{ item }</button>) }
+                    </div>
+                    <div className="forum_query">
+                        <input
+                            type="text"
+                            value={query} 
+                            onChange={handleQueryChange}
+                            placeholder="Search..."
+                        />
+                    </div>
+                    <button className="forum_search" onClick={handleSearch} >
+                        <SearchIcon />
+                    </button>
+                </form>
+                <PostList searchRequested={searchRequested} category={category} query={query} setStatusCode={setStatusCode} />
+            </div>
             { createRequested ? <CreatePost username={username} setCreateRequested={setCreateRequested} setStatusCode={setStatusCode} /> : <></> }
         </div>
     );

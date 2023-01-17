@@ -8,53 +8,52 @@
     height: calc(100% - 75px);
 }
 
-.home_left {
+.home_contents div {
+    flex: 1 1 0;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.home_left {
     font-family: 'Georgia', serif;
     font-size: min(calc(35px + 1vw + 1vh), 60px);
     font-style: italic;
-    width: 50%;
     text-align: left;
     line-height: 80px;
     padding: 20px;
 }
 
-.home_right {
+.home_right div {
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 640px;
-    height: 480px;
-    padding: 20px;
-    margin: 1%;
-}
-
-.home_right svg {
-    padding-top: 50px;
-}
-
-.home_slogan {
-    position: absolute;
-    padding-bottom: 150px;
-    padding-right: 150px;
+    height: 490px;
+    max-width: 530px;
     font-family: 'Georgia', serif;
     font-size: 35px;
     font-weight: bold;
 }
 
+.home_right svg {
+    position: absolute;
+    bottom: 0;
+    left: 80px;
+}
+
 .home_share {
-    vertical-align: -300%;
+    position: absolute;
+    bottom: 140px;
+    left: 2px;
 }
 
 .home_learn {
-    vertical-align: 0%;
-    margin: 0 65px 0 90px;
+    position: absolute;
+    bottom: 265px;
+    left: 190px;
 }
 
 .home_grow {
-    vertical-align: 490%;
+    position: absolute;
+    bottom: 455px;
+    left: 355px;
     font-style: italic;
 }

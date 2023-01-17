@@ -9,22 +9,15 @@
     flex-direction: row;
 }
 
-.signin_left {
+.signin_contents div {
+    flex: 1 1 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50%;
 }
 
 .signin_welcoming {
     padding: 20px;
-}
-
-.signin_right {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
 }
 
 .signin_right form {

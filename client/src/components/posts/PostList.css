@@ -1,8 +1,4 @@
 .postlist {
-    position: absolute;
-    top: 95px;
-    bottom: 20px;
-    right: 110px;
     width: 800px;
 }
 
@@ -25,19 +21,15 @@
 
 .postlist_posts {
     position: absolute;
-    bottom: 0px;
-    top: 59px;
+    bottom: 30px;
+    top: 164px;
     overflow: auto;
     overflow-x: hidden;
 }
 
 .postlist_no-posts {
-    position: absolute;
     display: flex;
     justify-content: center;
-    align-items: center;
-    top: 95px;
-    right: 110px;
     width: 800px;
     text-align: center;
     font-size: 18px;
